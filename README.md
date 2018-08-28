@@ -1,2 +1,2 @@
 # Calendar
-Calendar app showing agenda for the day
+Calendar Lite app showing agenda for the day
