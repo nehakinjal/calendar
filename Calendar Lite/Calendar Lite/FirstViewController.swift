@@ -34,11 +34,7 @@ class FirstViewController: UIViewController {
         self.agendaTableView.dataSource = self
         self.monthCollectionView.dataSource = self
         self.monthCollectionView.delegate = self
-        
         self.todayNavigationItem.title = CalendarService.today()
-        
-//        let indexPath = IndexPath(item: (CalendarService.currentDate() + CalendarService.firstDayOfCurrentMonth()), section: 1)
-//        self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .bottom)
         
 
     }
@@ -91,8 +87,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         } else {
             
             let cell = self.monthCollectionView.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath) as! DateCollectionViewCell
-            let date = self.dateAtIndexRow(indexPath.row)
-            cell.populate(date)
+            cell.populate(self.dateAtIndexRow(indexPath.row))
             return cell
         }
         
@@ -111,6 +106,12 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         return CGSize(width: size, height: Int(flowLayout.itemSize.height))
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        
+        let indexPath = IndexPath(item: (CalendarService.currentDate() + CalendarService.firstDayOfCurrentMonth()), section: 1)
+        self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        
+    }
 
 }
 
