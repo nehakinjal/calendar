@@ -48,7 +48,7 @@ extension Date {
         get {
             var firstWeekday:Int = 0
             if let first = self.firstOfMonth {
-                firstWeekday = first.weekday - 1
+                firstWeekday = first.weekday
             }
             return firstWeekday
         }

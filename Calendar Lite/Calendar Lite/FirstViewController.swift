@@ -18,15 +18,21 @@ class FirstViewController: UIViewController {
     let today = Date()
     
     
-    func cellsforMonth() -> Int{
-
-        return (self.today.numberOfDaysInMonth + self.today.weekdayOnFirstOfMonth)
+    var totalCellsforMonth: Int {
+        get {
+            return (self.today.numberOfDaysInMonth + self.today.weekdayOnFirstOfMonth - 1)
+        }
     }
     
+    var numberOfEmptyCells: Int {
+        get {
+            return (self.today.weekdayOnFirstOfMonth - 1)
+        }
+    }
     
     func dateAtIndexRow(_ row:Int) -> Int {
 
-        return ((row < self.today.weekdayOnFirstOfMonth) ? 0 : (row - self.today.weekdayOnFirstOfMonth + 1))
+        return ((row < self.numberOfEmptyCells) ? 0 : (row - self.numberOfEmptyCells + 1))
     }
     
     
@@ -73,7 +79,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         if section == 0 {
             return CalendarService.weekdays.count
         } else {
-            return self.cellsforMonth()
+            return self.totalCellsforMonth
         }
         
     }
@@ -115,7 +121,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     override func viewDidAppear(_ animated: Bool) {
     
-        let indexPath = IndexPath(item: (self.today.day + self.today.weekdayOnFirstOfMonth), section: 1)
+        let indexPath = IndexPath(item: (self.today.day + self.today.weekdayOnFirstOfMonth - 1 ), section: 1)
         self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
         
     }
