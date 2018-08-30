@@ -15,6 +15,7 @@
 		9119FCDB212655C700BB96A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9119FCD9212655C700BB96A8 /* LaunchScreen.storyboard */; };
 		9119FCE6212655C700BB96A8 /* Calendar_LiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCE5212655C700BB96A8 /* Calendar_LiteTests.swift */; };
 		9119FCF22126561700BB96A8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCF12126561700BB96A8 /* Event.swift */; };
+		91761CAB21378362007CBF3B /* Date_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91761CAA21378362007CBF3B /* Date_Extension.swift */; };
 		91E36BBC2130823E00267A24 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BBB2130823E00267A24 /* DateCollectionViewCell.swift */; };
 		91E36BBE21347B2100267A24 /* WeeekdayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BBD21347B2100267A24 /* WeeekdayCollectionViewCell.swift */; };
 		91E36BC021348EEF00267A24 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BBF21348EEF00267A24 /* CalendarService.swift */; };
@@ -24,6 +25,8 @@
 		91E36BDD2134B00000267A24 /* CalendarKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E36BC82134AFFF00267A24 /* CalendarKit.framework */; };
 		91E36BDE2134B00000267A24 /* CalendarKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 91E36BC82134AFFF00267A24 /* CalendarKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		91E36BE92134B0E500267A24 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BE82134B0E400267A24 /* Circle.swift */; };
+		91F40D6D2137567400581F80 /* UIColor_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F40D6C2137567400581F80 /* UIColor_Extension.swift */; };
+		91F40D6F213756E200581F80 /* UIColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91F40D6E213756E200581F80 /* UIColorTests.swift */; };
 		91FA9A20212F5E7700987C12 /* AgendaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FA9A1F212F5E7700987C12 /* AgendaTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +88,7 @@
 		9119FCE5212655C700BB96A8 /* Calendar_LiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar_LiteTests.swift; sourceTree = "<group>"; };
 		9119FCE7212655C700BB96A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9119FCF12126561700BB96A8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		91761CAA21378362007CBF3B /* Date_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date_Extension.swift; sourceTree = "<group>"; };
 		91E36BBB2130823E00267A24 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		91E36BBD21347B2100267A24 /* WeeekdayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeekdayCollectionViewCell.swift; sourceTree = "<group>"; };
 		91E36BBF21348EEF00267A24 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 		91E36BD72134B00000267A24 /* CalendarKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarKitTests.swift; sourceTree = "<group>"; };
 		91E36BD92134B00000267A24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91E36BE82134B0E400267A24 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
+		91F40D6C2137567400581F80 /* UIColor_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor_Extension.swift; sourceTree = "<group>"; };
+		91F40D6E213756E200581F80 /* UIColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorTests.swift; sourceTree = "<group>"; };
 		91FA9A1F212F5E7700987C12 /* AgendaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -135,7 +141,6 @@
 		9119FCC2212655C500BB96A8 = {
 			isa = PBXGroup;
 			children = (
-				91E36BBD21347B2100267A24 /* WeeekdayCollectionViewCell.swift */,
 				9119FCCD212655C500BB96A8 /* Calendar Lite */,
 				9119FCE4212655C700BB96A8 /* Calendar LiteTests */,
 				91E36BC92134AFFF00267A24 /* CalendarKit */,
@@ -158,6 +163,7 @@
 		9119FCCD212655C500BB96A8 /* Calendar Lite */ = {
 			isa = PBXGroup;
 			children = (
+				91F40D6B213755BC00581F80 /* Util */,
 				9119FCF0212655DA00BB96A8 /* Data Model */,
 				9119FCCE212655C500BB96A8 /* AppDelegate.swift */,
 				9119FCD0212655C500BB96A8 /* FirstViewController.swift */,
@@ -168,6 +174,7 @@
 				9119FCDC212655C700BB96A8 /* Info.plist */,
 				91FA9A1F212F5E7700987C12 /* AgendaTableViewCell.swift */,
 				91E36BBB2130823E00267A24 /* DateCollectionViewCell.swift */,
+				91E36BBD21347B2100267A24 /* WeeekdayCollectionViewCell.swift */,
 			);
 			path = "Calendar Lite";
 			sourceTree = "<group>";
@@ -177,6 +184,7 @@
 			children = (
 				9119FCE5212655C700BB96A8 /* Calendar_LiteTests.swift */,
 				9119FCE7212655C700BB96A8 /* Info.plist */,
+				91F40D6E213756E200581F80 /* UIColorTests.swift */,
 			);
 			path = "Calendar LiteTests";
 			sourceTree = "<group>";
@@ -207,6 +215,15 @@
 				91E36BD92134B00000267A24 /* Info.plist */,
 			);
 			path = CalendarKitTests;
+			sourceTree = "<group>";
+		};
+		91F40D6B213755BC00581F80 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				91F40D6C2137567400581F80 /* UIColor_Extension.swift */,
+				91761CAA21378362007CBF3B /* Date_Extension.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,10 +402,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9119FCF22126561700BB96A8 /* Event.swift in Sources */,
+				91761CAB21378362007CBF3B /* Date_Extension.swift in Sources */,
 				9119FCD3212655C500BB96A8 /* SecondViewController.swift in Sources */,
 				91E36BBE21347B2100267A24 /* WeeekdayCollectionViewCell.swift in Sources */,
 				91E36BC021348EEF00267A24 /* CalendarService.swift in Sources */,
 				91E36BBC2130823E00267A24 /* DateCollectionViewCell.swift in Sources */,
+				91F40D6D2137567400581F80 /* UIColor_Extension.swift in Sources */,
 				9119FCCF212655C500BB96A8 /* AppDelegate.swift in Sources */,
 				9119FCD1212655C500BB96A8 /* FirstViewController.swift in Sources */,
 				91FA9A20212F5E7700987C12 /* AgendaTableViewCell.swift in Sources */,
@@ -400,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9119FCE6212655C700BB96A8 /* Calendar_LiteTests.swift in Sources */,
+				91F40D6F213756E200581F80 /* UIColorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

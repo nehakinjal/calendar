@@ -13,8 +13,8 @@ class WeeekdayCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var weekday: UILabel!
     
     
-    func populate(_ day: Int) {
+    func populate(_ weekDay: String) {
         
-        self.weekday.text = CalendarService.weekdays[day-1]
+        self.weekday.text = weekDay
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 struct CalendarSource : Codable {
     
     let name: String
-    let color: Double
+    let color: Int //Hex rgb value
     
     enum CodingKeys: String, CodingKey {
         case name

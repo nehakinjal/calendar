@@ -14,10 +14,10 @@ class DateCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var todayView: Circle!
     @IBOutlet weak var date: UILabel!
     
-    func populate(_ date: Int) {
+    func populate(_ date: Int, today: Int) {
         
         self.date.text = date > 0 ? String(date) : ""
-        self.todayView.isHidden = (CalendarService.currentDate() != date)
+        self.todayView.isHidden = (today != date)
     }
     
 }
