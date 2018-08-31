@@ -44,7 +44,7 @@ class FirstViewController: UIViewController {
         self.agendaTableView.dataSource = self
         self.monthCollectionView.dataSource = self
         self.monthCollectionView.delegate = self
-        self.todayNavigationItem.title = self.today.monthDay
+        self.todayNavigationItem.title = self.today.monthLabel
         
         if let layout = self.monthCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionHeadersPinToVisibleBounds = true
@@ -56,7 +56,7 @@ class FirstViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        let indexPath = IndexPath(item: (self.today.day + self.numberOfEmptyCells ), section: 0)
+        let indexPath = IndexPath(item: (self.today.day - 1 + self.numberOfEmptyCells ), section: 0)
         self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
         
     }

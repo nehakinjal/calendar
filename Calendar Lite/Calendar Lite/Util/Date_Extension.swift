@@ -61,15 +61,15 @@ extension Date {
         }
     }
     
-    var monthDay:String {
-        get {
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.setLocalizedDateFormatFromTemplate("MMMMd")
-            
-            return (dateFormatter.string(from: self))
-        }
-    }
+//    var monthDay:String {
+//        get {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//            dateFormatter.setLocalizedDateFormatFromTemplate("MMMMd")
+//
+//            return (dateFormatter.string(from: self))
+//        }
+//    }
     
     var monthLabel:String {
         get {
