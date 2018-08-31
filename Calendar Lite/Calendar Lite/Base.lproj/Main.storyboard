@@ -29,26 +29,26 @@
                                             <constraint firstAttribute="height" constant="128" id="Ipi-QY-WJ0"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iq0-Fl-1Q0">
-                                            <size key="itemSize" width="39" height="41"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="itemSize" width="45" height="39"/>
+                                            <size key="headerReferenceSize" width="50" height="50"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="date" id="lGU-wg-17L" customClass="DateCollectionViewCell" customModule="Calendar_Lite" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="39" height="41"/>
+                                                <rect key="frame" x="0.0" y="50" width="45" height="39"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="39" height="41"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="39"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AI5-6X-gTz" customClass="Circle" customModule="CalendarKit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="39" height="39"/>
+                                                            <rect key="frame" x="3" y="0.0" width="39" height="39"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="31" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHT-Kd-Xp3">
-                                                            <rect key="frame" x="8" y="12" width="23" height="17"/>
+                                                            <rect key="frame" x="11" y="11" width="23" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
@@ -61,27 +61,24 @@
                                                     <outlet property="todayView" destination="AI5-6X-gTz" id="SEK-Xr-JlI"/>
                                                 </connections>
                                             </collectionViewCell>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="weekdayTitle" id="QwQ-3M-8nu" customClass="WeeekdayCollectionViewCell" customModule="Calendar_Lite" customModuleProvider="target">
-                                                <rect key="frame" x="56" y="0.0" width="39" height="41"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="39" height="41"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuE-th-5vb">
-                                                            <rect key="frame" x="2" y="12" width="35" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </view>
-                                                <connections>
-                                                    <outlet property="weekday" destination="xuE-th-5vb" id="Xk5-F8-YKP"/>
-                                                </connections>
-                                            </collectionViewCell>
                                         </cells>
+                                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="MonthCollectionReusableView" id="32R-ds-A55" customClass="MonthCollectionReusableView" customModule="Calendar_Lite" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4Rc-ue-Ax9">
+                                                    <rect key="frame" x="8" y="17" width="359" height="17"/>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="4Rc-ue-Ax9" secondAttribute="trailing" id="mtS-Py-9xK"/>
+                                                <constraint firstItem="4Rc-ue-Ax9" firstAttribute="leading" secondItem="32R-ds-A55" secondAttribute="leadingMargin" id="pjF-5N-2ba"/>
+                                            </constraints>
+                                            <connections>
+                                                <outlet property="stackView" destination="4Rc-ue-Ax9" id="pfb-zU-tcR"/>
+                                            </connections>
+                                        </collectionReusableView>
                                     </collectionView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C57-zb-QVy">
                                         <rect key="frame" x="0.0" y="135" width="375" height="419"/>

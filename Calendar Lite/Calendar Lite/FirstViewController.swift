@@ -46,6 +46,19 @@ class FirstViewController: UIViewController {
         self.monthCollectionView.delegate = self
         self.todayNavigationItem.title = self.today.monthDay
         
+        if let layout = self.monthCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionHeadersPinToVisibleBounds = true
+        }
+        
+    }
+    
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        let indexPath = IndexPath(item: (self.today.day + self.numberOfEmptyCells ), section: 0)
+        self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        
     }
 
 }
@@ -70,36 +83,22 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
 extension FirstViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if section == 0 {
-            return CalendarService.weekdays.count
-        } else {
-            return self.totalCellsforMonth
-        }
-        
+        return self.totalCellsforMonth
+
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.section == 0 {
-            
-            let cell = self.monthCollectionView.dequeueReusableCell(withReuseIdentifier: "weekdayTitle", for: indexPath) as! WeeekdayCollectionViewCell
-            cell.populate(CalendarService.weekdays[indexPath.row])
-            return cell
-        
-        } else {
-            
-            let cell = self.monthCollectionView.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath) as! DateCollectionViewCell
-            cell.populate(self.dateAtIndexRow(indexPath.row), today: self.today.day)
-            return cell
-        
-        }
+        let cell = self.monthCollectionView.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath) as! DateCollectionViewCell
+        cell.populate(self.dateAtIndexRow(indexPath.row), today: self.today.day)
+        return cell
         
     }
     
@@ -118,12 +117,22 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         return CGSize(width: size, height: Int(flowLayout.itemSize.height))
     }
 
-    
-    override func viewDidAppear(_ animated: Bool) {
-    
-        let indexPath = IndexPath(item: (self.today.day + self.today.weekdayOnFirstOfMonth - 1 ), section: 1)
-        self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+    func collectionView(_ collectionView: UICollectionView,
+                                 viewForSupplementaryElementOfKind kind: String,
+                                 at indexPath: IndexPath) -> UICollectionReusableView {
         
+        switch kind {
+        
+        case UICollectionElementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                             withReuseIdentifier: "MonthCollectionReusableView",
+                                                                             for: indexPath) as! MonthCollectionReusableView
+            headerView.addWeekdayLabels()
+            return headerView
+            
+        default:
+            assert(false, "Undefined element kind")
+        }
     }
 
 }

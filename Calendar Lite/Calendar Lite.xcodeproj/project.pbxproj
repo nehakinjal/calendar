@@ -16,6 +16,7 @@
 		9119FCE6212655C700BB96A8 /* Calendar_LiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCE5212655C700BB96A8 /* Calendar_LiteTests.swift */; };
 		9119FCF22126561700BB96A8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCF12126561700BB96A8 /* Event.swift */; };
 		91761CAB21378362007CBF3B /* Date_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91761CAA21378362007CBF3B /* Date_Extension.swift */; };
+		91761CAD2138AE40007CBF3B /* MonthCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91761CAC2138AE40007CBF3B /* MonthCollectionReusableView.swift */; };
 		91E36BBC2130823E00267A24 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BBB2130823E00267A24 /* DateCollectionViewCell.swift */; };
 		91E36BBE21347B2100267A24 /* WeeekdayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BBD21347B2100267A24 /* WeeekdayCollectionViewCell.swift */; };
 		91E36BC021348EEF00267A24 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BBF21348EEF00267A24 /* CalendarService.swift */; };
@@ -89,6 +90,7 @@
 		9119FCE7212655C700BB96A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9119FCF12126561700BB96A8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		91761CAA21378362007CBF3B /* Date_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date_Extension.swift; sourceTree = "<group>"; };
+		91761CAC2138AE40007CBF3B /* MonthCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCollectionReusableView.swift; sourceTree = "<group>"; };
 		91E36BBB2130823E00267A24 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		91E36BBD21347B2100267A24 /* WeeekdayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeekdayCollectionViewCell.swift; sourceTree = "<group>"; };
 		91E36BBF21348EEF00267A24 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				91FA9A1F212F5E7700987C12 /* AgendaTableViewCell.swift */,
 				91E36BBB2130823E00267A24 /* DateCollectionViewCell.swift */,
 				91E36BBD21347B2100267A24 /* WeeekdayCollectionViewCell.swift */,
+				91761CAC2138AE40007CBF3B /* MonthCollectionReusableView.swift */,
 			);
 			path = "Calendar Lite";
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				91E36BBE21347B2100267A24 /* WeeekdayCollectionViewCell.swift in Sources */,
 				91E36BC021348EEF00267A24 /* CalendarService.swift in Sources */,
 				91E36BBC2130823E00267A24 /* DateCollectionViewCell.swift in Sources */,
+				91761CAD2138AE40007CBF3B /* MonthCollectionReusableView.swift in Sources */,
 				91F40D6D2137567400581F80 /* UIColor_Extension.swift in Sources */,
 				9119FCCF212655C500BB96A8 /* AppDelegate.swift in Sources */,
 				9119FCD1212655C500BB96A8 /* FirstViewController.swift in Sources */,
