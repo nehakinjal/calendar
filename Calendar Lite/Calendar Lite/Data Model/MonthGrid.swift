@@ -83,5 +83,8 @@ struct MonthGrid {
         }
     }
     
+    func cellIndex(forDay:Int) -> Int {
+        return (forDay - 1 + self.prefixCells )
+    }
     
 }

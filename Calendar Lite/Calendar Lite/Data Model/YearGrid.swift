@@ -45,4 +45,10 @@ struct YearGrid {
             return total
         }
     }
+    
+    var selectedDateCellIndex: Int {
+        get {
+            return 0
+        }
+    }
 }
