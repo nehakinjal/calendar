@@ -24,11 +24,13 @@ class FirstViewController: UIViewController {
         }
     }
     
+    
     var numberOfEmptyCells: Int {
         get {
             return (self.today.weekdayOnFirstOfMonth - 1)
         }
     }
+    
     
     func dateAtIndexRow(_ row:Int) -> Int {
 
@@ -50,27 +52,29 @@ class FirstViewController: UIViewController {
             layout.sectionHeadersPinToVisibleBounds = true
         }
         
+        let year = YearGrid(self.today)
+        print("Cells for year \(year.totalCellsRequired)")
+        
     }
     
-
     
     override func viewDidAppear(_ animated: Bool) {
         
         let indexPath = IndexPath(item: (self.today.day - 1 + self.numberOfEmptyCells ), section: 0)
-        self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .top)
+        self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .bottom)
         
     }
 
 }
 
+
 extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
 
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
 
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaSummary", for: indexPath) as! AgendaTableViewCell
@@ -79,6 +83,7 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
 }
+
 
 extension FirstViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -117,6 +122,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         return CGSize(width: size, height: Int(flowLayout.itemSize.height))
     }
 
+    
     func collectionView(_ collectionView: UICollectionView,
                                  viewForSupplementaryElementOfKind kind: String,
                                  at indexPath: IndexPath) -> UICollectionReusableView {

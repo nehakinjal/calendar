@@ -61,15 +61,6 @@ extension Date {
         }
     }
     
-//    var monthDay:String {
-//        get {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.locale = Locale(identifier: "en_US")
-//            dateFormatter.setLocalizedDateFormatFromTemplate("MMMMd")
-//
-//            return (dateFormatter.string(from: self))
-//        }
-//    }
     
     var monthLabel:String {
         get {
@@ -78,6 +69,38 @@ extension Date {
             dateFormatter.setLocalizedDateFormatFromTemplate("MMMM")
             
             return (dateFormatter.string(from: self))
+        }
+    }
+    
+    static func dateFromComponents (year:Int, month:Int, day:Int) -> Date? {
+        
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = day
+        
+        let date = Calendar.current.date(from:components)
+    
+        return date
+    }
+    
+    static func startOf(month: Int, year:Int) -> Date? {
+        return Date.dateFromComponents(year: year, month: month, day: 1)
+    }
+    
+    static func endOf(month: Int, year:Int) -> Date? {
+        
+        if let start = Date.startOf(month:month, year: year) {
+            return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: start)
+        } else {
+            return nil
+        }
+        
+    }
+    
+    static var monthRange: CountableClosedRange<Int>  {
+        get {
+          return 1...Calendar.current.shortMonthSymbols.count
         }
     }
     

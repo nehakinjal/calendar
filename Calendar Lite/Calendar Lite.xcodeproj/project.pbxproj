@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		910FB29F2139C15D0085AF35 /* YearGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910FB29E2139C15D0085AF35 /* YearGrid.swift */; };
+		910FB2A1213F38300085AF35 /* MonthGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910FB2A0213F38300085AF35 /* MonthGrid.swift */; };
 		9119FCCF212655C500BB96A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCCE212655C500BB96A8 /* AppDelegate.swift */; };
 		9119FCD1212655C500BB96A8 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCD0212655C500BB96A8 /* FirstViewController.swift */; };
 		9119FCD3212655C500BB96A8 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCD2212655C500BB96A8 /* SecondViewController.swift */; };
@@ -77,6 +79,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		910FB29E2139C15D0085AF35 /* YearGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearGrid.swift; sourceTree = "<group>"; };
+		910FB2A0213F38300085AF35 /* MonthGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthGrid.swift; sourceTree = "<group>"; };
 		9119FCCB212655C500BB96A8 /* Calendar Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calendar Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9119FCCE212655C500BB96A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9119FCD0212655C500BB96A8 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +201,8 @@
 			children = (
 				9119FCF12126561700BB96A8 /* Event.swift */,
 				91E36BBF21348EEF00267A24 /* CalendarService.swift */,
+				910FB29E2139C15D0085AF35 /* YearGrid.swift */,
+				910FB2A0213F38300085AF35 /* MonthGrid.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -409,11 +415,13 @@
 				9119FCD3212655C500BB96A8 /* SecondViewController.swift in Sources */,
 				91E36BBE21347B2100267A24 /* WeeekdayCollectionViewCell.swift in Sources */,
 				91E36BC021348EEF00267A24 /* CalendarService.swift in Sources */,
+				910FB2A1213F38300085AF35 /* MonthGrid.swift in Sources */,
 				91E36BBC2130823E00267A24 /* DateCollectionViewCell.swift in Sources */,
 				91761CAD2138AE40007CBF3B /* MonthCollectionReusableView.swift in Sources */,
 				91F40D6D2137567400581F80 /* UIColor_Extension.swift in Sources */,
 				9119FCCF212655C500BB96A8 /* AppDelegate.swift in Sources */,
 				9119FCD1212655C500BB96A8 /* FirstViewController.swift in Sources */,
+				910FB29F2139C15D0085AF35 /* YearGrid.swift in Sources */,
 				91FA9A20212F5E7700987C12 /* AgendaTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,6 +618,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2A8NQJ5KS6;
 				INFOPLIST_FILE = "Calendar Lite/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -629,6 +638,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2A8NQJ5KS6;
 				INFOPLIST_FILE = "Calendar Lite/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
