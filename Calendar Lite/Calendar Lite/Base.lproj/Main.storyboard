@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -128,8 +129,23 @@
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
                     <navigationItem key="navigationItem" title="today" id="XWx-aK-u1z">
-                        <barButtonItem key="leftBarButtonItem" title="Month" id="EFI-RU-3sv"/>
-                        <barButtonItem key="rightBarButtonItem" title="Day" id="29m-3J-kOG"/>
+                        <barButtonItem key="leftBarButtonItem" title="Month" id="EFI-RU-3sv">
+                            <connections>
+                                <action selector="viewMonth:" destination="9pv-A4-QxB" id="vFC-LB-X1z"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Agenda" id="29m-3J-kOG">
+                                <connections>
+                                    <action selector="viewAgenda:" destination="9pv-A4-QxB" id="Q5g-SE-UsK"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Both" id="vLu-VB-PgZ">
+                                <connections>
+                                    <action selector="viewBothMonthAndAgenda:" destination="9pv-A4-QxB" id="6eW-q4-8Gz"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="agendaTableView" destination="C57-zb-QVy" id="dO3-fC-hQY"/>

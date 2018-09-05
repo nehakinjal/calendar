@@ -26,8 +26,6 @@ class FirstViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.agendaTableView.delegate = self
         self.agendaTableView.dataSource = self
-        self.agendaTableView.isHidden = true
-        
         self.monthCollectionView.dataSource = self
         self.monthCollectionView.delegate = self
         self.todayNavigationItem.title = self.today.monthLabel
@@ -52,6 +50,20 @@ class FirstViewController: UIViewController {
         
     }
 
+    @IBAction func viewMonth(_ sender: Any) {
+        self.monthCollectionView.isHidden = false
+        self.agendaTableView.isHidden = true
+    }
+
+    @IBAction func viewAgenda(_ sender: Any) {
+        self.monthCollectionView.isHidden = true
+        self.agendaTableView.isHidden = false
+    }
+    
+    @IBAction func viewBothMonthAndAgenda(_ sender: Any) {
+        self.monthCollectionView.isHidden = false
+        self.agendaTableView.isHidden = false
+    }
 }
 
 
