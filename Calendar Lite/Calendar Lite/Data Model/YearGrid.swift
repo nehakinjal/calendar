@@ -37,18 +37,47 @@ struct YearGrid {
     }
     
     
-    var totalCellsRequired: Int {
-        get {
-            let total = self.months.reduce(0) { (tempTotal, mGrid) -> Int in
-                return tempTotal + mGrid.totalCellsRequired
+    func cellsRequiredForMonths(_ uptoMonth:Int) -> Int{
+        
+        if Date.monthRange ~= uptoMonth {
+            let cellCount = self.months[...(uptoMonth-1)].reduce(0) { total, mGrid in
+                return total + mGrid.totalCellsRequired
             }
-            return total
-        }
-    }
-    
-    var selectedDateCellIndex: Int {
-        get {
+            return cellCount
+        } else {
             return 0
         }
     }
+    
+    
+    var cellIndexForSelectedDate:Int {
+        get {
+            let month = self.selectedDate.month
+            let day = self.selectedDate.day
+            let cellIndex = self.cellsRequiredForMonths(month - 1) + self.months[month-1].cellIndex(forDay: day)
+            return cellIndex
+        }
+    }
+    
+    
+    var totalCellsRequired: Int {
+        get {
+            return self.cellsRequiredForMonths(Date.monthRange.upperBound)
+        }
+    }
+
+    
+    var cells:[Int] {
+    
+        get {
+            var cells:[Int] = []
+        
+            for monthGrid in self.months {
+                cells.append(contentsOf:monthGrid.cells)
+            }
+            return cells
+        }
+    }
+    
+
 }

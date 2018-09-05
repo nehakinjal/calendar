@@ -71,13 +71,15 @@ struct MonthGrid {
         get {
             var _cells = [Int]()
             _cells.reserveCapacity(self.totalCellsRequired)
+            var value:Int = 0
             
             for i in 0..<self.totalCellsRequired {
-                if ( i < self.prefixCells || i > (self.prefixCells + self.days)) {
-                    _cells[i] = 0
+                if ( i < self.prefixCells || i > (self.prefixCells + self.days - 1)) {
+                    value = 0
                 } else {
-                    _cells[i] = i - self.prefixCells + 1
+                    value = i - self.prefixCells + 1
                 }
+                _cells.append(value)
             }
             return _cells
         }
