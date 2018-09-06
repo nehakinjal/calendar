@@ -28,15 +28,13 @@ class FirstViewController: UIViewController {
         self.agendaTableView.dataSource = self
         self.monthCollectionView.dataSource = self
         self.monthCollectionView.delegate = self
-        self.todayNavigationItem.title = self.today.monthLabel
+        self.todayNavigationItem.title = self.today.monthLabel + " \(self.today.year)"
         
         if let layout = self.monthCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionHeadersPinToVisibleBounds = true
         }
         
         self.yearGrid = YearGrid(self.today)
-        print("Cells for year \(self.yearGrid.totalCellsRequired)")
-        
         self.cells = self.yearGrid.cells
         
     }
@@ -96,7 +94,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let numberOfItemsPerRow:Int = CalendarService.weekdays.count
+        let numberOfItemsPerRow:Int = Date.weekdays.count
         let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
         let totalSpace = flowLayout.sectionInset.left
             + flowLayout.sectionInset.right

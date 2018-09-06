@@ -11,11 +11,7 @@ import UIKit
 class CalendarService {
 
     
-    static var weekdays: [String] {
-        get {
-            return DateFormatter().shortWeekdaySymbols
-        }
-    }
+
 
 
     

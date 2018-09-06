@@ -64,11 +64,7 @@ extension Date {
     
     var monthLabel:String {
         get {
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.setLocalizedDateFormatFromTemplate("MMMM")
-            
-            return (dateFormatter.string(from: self))
+            return Calendar.current.monthSymbols[month-1]
         }
     }
     
@@ -101,6 +97,12 @@ extension Date {
     static var monthRange: CountableClosedRange<Int>  {
         get {
           return 1...Calendar.current.shortMonthSymbols.count
+        }
+    }
+    
+    static var weekdays: [String] {
+        get {
+            return Calendar.current.veryShortWeekdaySymbols
         }
     }
     

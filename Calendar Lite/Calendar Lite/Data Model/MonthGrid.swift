@@ -56,7 +56,7 @@ struct MonthGrid {
     }
     var suffixCells: Int {
         get {
-            return CalendarService.weekdays.count - self.lastWeekday
+            return Date.weekdays.count - self.lastWeekday
         }
     }
     

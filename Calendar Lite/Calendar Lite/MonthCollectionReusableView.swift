@@ -19,11 +19,11 @@ class MonthCollectionReusableView: UICollectionReusableView {
         self.stackView.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
         self.stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive=true
         
-        for weekday in CalendarService.weekdays {
+        for weekday in Date.weekdays {
             let label = UILabel()
             label.text = weekday
             label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+            label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
             self.stackView.addArrangedSubview(label)
         }
 
