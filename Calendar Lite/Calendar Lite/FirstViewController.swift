@@ -16,6 +16,7 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var agendaTableView: UITableView!
     
     let today = Date()
+    var selectedDateIndexPath:IndexPath?
     var yearGrid:YearGrid!
     var cells:[DayCell] = []
     
@@ -28,6 +29,8 @@ class FirstViewController: UIViewController {
         self.agendaTableView.dataSource = self
         self.monthCollectionView.dataSource = self
         self.monthCollectionView.delegate = self
+        self.monthCollectionView.allowsSelection = true
+        
         self.todayNavigationItem.title = self.today.monthLabel + " \(self.today.year)"
         
         if let layout = self.monthCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -41,22 +44,28 @@ class FirstViewController: UIViewController {
     
     
     override func viewDidAppear(_ animated: Bool) {
-        
         let indexPath = IndexPath(item:self.yearGrid.cellIndexForSelectedDate , section: 0)
-        
+        self.selectCalendarItem(indexPath: indexPath)
+    }
+    
+    
+    func selectCalendarItem(indexPath:IndexPath) {
         self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .bottom)
-        
+        self.monthCollectionView.delegate?.collectionView!(self.monthCollectionView, didSelectItemAt: indexPath)
     }
 
+    
     @IBAction func viewMonth(_ sender: Any) {
         self.monthCollectionView.isHidden = false
         self.agendaTableView.isHidden = true
     }
+    
 
     @IBAction func viewAgenda(_ sender: Any) {
         self.monthCollectionView.isHidden = true
         self.agendaTableView.isHidden = false
     }
+    
     
     @IBAction func viewBothMonthAndAgenda(_ sender: Any) {
         self.monthCollectionView.isHidden = false
@@ -74,19 +83,38 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return self.self.yearGrid.totalCellsRequired//totalCellsforMonth
-
+        return self.self.yearGrid.totalCellsRequired
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = self.monthCollectionView.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath) as! DateCollectionViewCell
-        cell.populate(self.cells[indexPath.row].label, today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row))
+        cell.populate(label:self.cells[indexPath.row].label,
+                      today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row),
+                      selected: (self.selectedDateIndexPath == indexPath))
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedDateIndexPath = indexPath
+        self.changeSelection(collectionView, indexPath: indexPath, selected: true)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        self.changeSelection(collectionView, indexPath: indexPath, selected: false)
+    }
+    
+    
+    func changeSelection(_ collectionView: UICollectionView, indexPath:IndexPath, selected:Bool) {
         
+        if let cell = collectionView.cellForItem(at: indexPath) as! DateCollectionViewCell? {
+            cell.populate(label: cell.date.text ?? "",
+                          today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row),
+                          selected: selected)
+        }
     }
     
     
@@ -122,7 +150,6 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
             assert(false, "Undefined element kind")
         }
     }
-
 
 }
 
