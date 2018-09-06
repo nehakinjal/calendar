@@ -54,7 +54,7 @@ struct YearGrid {
         get {
             let month = self.selectedDate.month
             let day = self.selectedDate.day
-            let cellIndex = self.cellsRequiredForMonths(month - 1) + self.months[month-1].cellIndex(forDay: day)
+            let cellIndex = self.cellsRequiredForMonths(month - 1) + self.months[month-1].cellIndex(forDay: day) 
             return cellIndex
         }
     }
@@ -67,10 +67,10 @@ struct YearGrid {
     }
 
     
-    var cells:[Int] {
+    var cells:[DayCell] {
     
         get {
-            var cells:[Int] = []
+            var cells:[DayCell] = []
         
             for monthGrid in self.months {
                 cells.append(contentsOf:monthGrid.cells)

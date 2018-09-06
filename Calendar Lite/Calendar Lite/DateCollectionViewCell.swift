@@ -14,9 +14,17 @@ class DateCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var todayView: Circle!
     @IBOutlet weak var date: UILabel!
     
-    func populate(_ date: Int, today: Bool) {
+    func populate(_ date: String, today: Bool) {
         
-        self.date.text = date > 0 ? String(date) : ""
+        
+        if date.isNumeric() {
+            self.date.font = UIFont.systemFont(ofSize: self.date.font.pointSize)
+            self.date.textColor = UIColor.black
+        } else {
+            self.date.font = UIFont.boldSystemFont(ofSize: self.date.font.pointSize)
+            self.date.textColor = tintColor
+        }
+        self.date.text = date
         self.todayView.isHidden = !today
         
     }

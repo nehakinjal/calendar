@@ -17,7 +17,7 @@ class FirstViewController: UIViewController {
     
     let today = Date()
     var yearGrid:YearGrid!
-    var cells:[Int] = []
+    var cells:[DayCell] = []
     
     
     override func viewDidLoad() {
@@ -83,7 +83,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = self.monthCollectionView.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath) as! DateCollectionViewCell
-        cell.populate(self.cells[indexPath.row], today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row))
+        cell.populate(self.cells[indexPath.row].label, today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row))
         
         return cell
         

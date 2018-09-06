@@ -8,6 +8,22 @@
 
 import Foundation
 
+struct DayCell {
+    var day:Int
+    var month:Int
+    var label:String
+    
+    init(day: Int, month: Int) {
+        self.day = day
+        self.month = month
+        self.label = day > 0 ? String(day) : ""
+    }
+    
+    var monthLabel:String {
+        return Calendar.current.shortMonthSymbols[month-1]
+    }
+}
+
 struct MonthGrid {
     
     var month: Int
@@ -63,30 +79,70 @@ struct MonthGrid {
     
     var totalCellsRequired: Int {
         get {
+            //Need to add one row of cells just to separate months and put a month label
+            return self.dayCellsCount + Date.weekdays.count
+        }
+    }
+    
+    var dayCellsCount: Int {
+        get {
             return self.prefixCells + self.days + self.suffixCells
         }
     }
     
-    var cells:[Int] {
+    var cellsForMonthLabelSeparation:[DayCell] {
+        
         get {
-            var _cells = [Int]()
-            _cells.reserveCapacity(self.totalCellsRequired)
-            var value:Int = 0
+            var cells = [DayCell]()
+            let empltyCell = DayCell(day: 0, month: self.month)
             
-            for i in 0..<self.totalCellsRequired {
-                if ( i < self.prefixCells || i > (self.prefixCells + self.days - 1)) {
-                    value = 0
+            //Add a row for month separation and month label
+            for i in 0..<Date.weekdays.count {
+                var dayCell:DayCell
+                
+                if i == (firstWeekday-1) {
+                    //Print the label of the month on top of the first day of the month
+                    dayCell = empltyCell
+                    dayCell.label = dayCell.monthLabel
                 } else {
-                    value = i - self.prefixCells + 1
+                    dayCell = empltyCell
                 }
-                _cells.append(value)
+                cells.append(dayCell)
             }
-            return _cells
+            return cells
+        }
+    }
+    
+    var cellsForDays:[DayCell] {
+        
+        get {
+            var cells = [DayCell]()
+            var day:Int = 0
+            for i in 0..<self.dayCellsCount {
+                if ( i < self.prefixCells || i > (self.prefixCells + self.days - 1)) {
+                    day = 0
+                } else {
+                    day = i - self.prefixCells + 1
+                }
+                cells.append(DayCell(day: day, month: self.month))
+            }
+            return cells
+        }
+    }
+    
+    var cells:[DayCell] {
+        get {
+            var cells = [DayCell]()
+            cells.reserveCapacity(self.totalCellsRequired)
+            cells.append(contentsOf: self.cellsForMonthLabelSeparation)
+            cells.append(contentsOf: self.cellsForDays)
+
+            return cells
         }
     }
     
     func cellIndex(forDay:Int) -> Int {
-        return (forDay - 1 + self.prefixCells )
+        return (forDay - 1 + self.prefixCells + Date.weekdays.count)
     }
     
 }
