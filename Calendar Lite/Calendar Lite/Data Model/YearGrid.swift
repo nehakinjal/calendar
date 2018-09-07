@@ -67,17 +67,16 @@ struct YearGrid {
     }
 
     
-    var cells:[DayCell] {
+    lazy var cells:[DayCell] = {
     
-        get {
-            var cells:[DayCell] = []
-        
-            for monthGrid in self.months {
-                cells.append(contentsOf:monthGrid.cells)
-            }
-            return cells
+        var cells:[DayCell] = []
+    
+        for monthGrid in self.months {
+            cells.append(contentsOf:monthGrid.cells)
         }
-    }
+        return cells
+    
+    }()
     
 
 }

@@ -18,8 +18,23 @@ class FirstViewController: UIViewController {
     let today = Date()
     var selectedDateIndexPath:IndexPath?
     var yearGrid:YearGrid!
-    var cells:[DayCell] = []
     
+    var selectedDate:Date? {
+        get {
+            if let indexPath = self.selectedDateIndexPath {
+                let dayCell = self.yearGrid.cells[indexPath.row]
+                let date = Date.dateFromComponents(year: today.year, month: dayCell.month, day: dayCell.day)
+                return date
+            }
+            return nil
+        }
+    }
+    
+    var selectedDateLabel: String {
+        get {
+            return self.selectedDate?.longDate ?? ""
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +53,6 @@ class FirstViewController: UIViewController {
         }
         
         self.yearGrid = YearGrid(self.today)
-        self.cells = self.yearGrid.cells
         
     }
     
@@ -90,7 +104,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = self.monthCollectionView.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath) as! DateCollectionViewCell
-        cell.populate(label:self.cells[indexPath.row].label,
+        cell.populate(label:self.yearGrid.cells[indexPath.row].label,
                       today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row),
                       selected: (self.selectedDateIndexPath == indexPath))
         
@@ -98,8 +112,13 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         self.selectedDateIndexPath = indexPath
         self.changeSelection(collectionView, indexPath: indexPath, selected: true)
+        
+        //update agenda table view with selected date
+        let cell = self.agendaTableView.cellForRow(at: IndexPath(row: 0, section: 0))as! AgendaTableViewCell
+        cell.title.text = self.selectedDateLabel
     }
     
     
@@ -165,7 +184,7 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaSummary", for: indexPath) as! AgendaTableViewCell
-        cell.title.text = "Tea Time with Friends"
+        cell.title.text = self.selectedDateLabel
         return cell
     }
     

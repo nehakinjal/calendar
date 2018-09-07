@@ -37,22 +37,6 @@ extension Date {
         }
     }
     
-    var firstOfMonth:Date? {
-        get {
-            let interval = Calendar.current.dateInterval(of: .month, for: Date())
-            return interval?.start
-        }
-    }
-    
-    var weekdayOnFirstOfMonth:Int {
-        get {
-            var firstWeekday:Int = 0
-            if let first = self.firstOfMonth {
-                firstWeekday = first.weekday
-            }
-            return firstWeekday
-        }
-    }
     
     var numberOfDaysInMonth: Int {
         get {
@@ -68,6 +52,15 @@ extension Date {
         }
     }
     
+    var longDate: String {
+        get {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, MMMM dd, yyyy"
+            return formatter.string(from: self)
+        }
+    }
+    
+    // Convenience methods
     static func dateFromComponents (year:Int, month:Int, day:Int) -> Date? {
         
         var components = DateComponents()
