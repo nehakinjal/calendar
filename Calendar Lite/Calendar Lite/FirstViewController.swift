@@ -15,7 +15,10 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var monthCollectionView: UICollectionView!
     @IBOutlet weak var agendaTableView: UITableView!
     
+    
     let today = Date()
+    let todayLabel:String = "Today: "
+    
     var selectedDateIndexPath:IndexPath?
     var yearGrid:YearGrid!
     
@@ -32,7 +35,13 @@ class FirstViewController: UIViewController {
     
     var selectedDateLabel: String {
         get {
-            return self.selectedDate?.longDate ?? ""
+            var dateLabel = self.selectedDate?.longDate ?? ""
+            if let selectedDateIndexPath = self.selectedDateIndexPath {
+                if self.yearGrid.cellIndexForSelectedDate == selectedDateIndexPath.row {
+                    dateLabel = self.todayLabel + dateLabel
+                }
+            }
+            return dateLabel
         }
     }
     
@@ -40,22 +49,30 @@ class FirstViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
-        self.agendaTableView.delegate = self
-        self.agendaTableView.dataSource = self
-        self.monthCollectionView.dataSource = self
-        self.monthCollectionView.delegate = self
-        self.monthCollectionView.allowsSelection = true
+        self.initializeAgendaTableView()
+        self.initializeMonthCollectionView()
         
         self.todayNavigationItem.title = self.today.monthLabel + " \(self.today.year)"
-        
-        if let layout = self.monthCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionHeadersPinToVisibleBounds = true
-        }
-        
         self.yearGrid = YearGrid(self.today)
         
     }
     
+    func initializeAgendaTableView() {
+        
+        self.agendaTableView.delegate = self
+        self.agendaTableView.dataSource = self
+        
+    }
+    
+    func initializeMonthCollectionView() {
+        
+        self.monthCollectionView.dataSource = self
+        self.monthCollectionView.delegate = self
+        self.monthCollectionView.allowsSelection = true
+        if let layout = self.monthCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionHeadersPinToVisibleBounds = true
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         let indexPath = IndexPath(item:self.yearGrid.cellIndexForSelectedDate , section: 0)
@@ -175,17 +192,28 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
 // TableView for Agenda per week
 extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return section == 0 ? 1: 3
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaSummary", for: indexPath) as! AgendaTableViewCell
-        cell.title.text = self.selectedDateLabel
-        return cell
+        if indexPath.section == 0 {
+            let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaSummary", for: indexPath) as! AgendaTableViewCell
+            cell.title.text = self.selectedDateLabel
+            self.agendaTableView.rowHeight = 40
+            return cell
+        } else {
+            let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaDetail", for: indexPath) as! AgendaDetailTableViewCell
+            self.agendaTableView.rowHeight = 80
+            
+            return cell
+        }
     }
     
 }
