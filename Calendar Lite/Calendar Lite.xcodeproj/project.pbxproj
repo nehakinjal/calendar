@@ -17,6 +17,7 @@
 		9119FCDB212655C700BB96A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9119FCD9212655C700BB96A8 /* LaunchScreen.storyboard */; };
 		9119FCE6212655C700BB96A8 /* Calendar_LiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCE5212655C700BB96A8 /* Calendar_LiteTests.swift */; };
 		9119FCF22126561700BB96A8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCF12126561700BB96A8 /* Event.swift */; };
+		915B4CFB2145B7FD00ABCDD2 /* TimeInterval_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915B4CFA2145B7FD00ABCDD2 /* TimeInterval_extension.swift */; };
 		91761CAB21378362007CBF3B /* Date_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91761CAA21378362007CBF3B /* Date_Extension.swift */; };
 		91761CAD2138AE40007CBF3B /* MonthCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91761CAC2138AE40007CBF3B /* MonthCollectionReusableView.swift */; };
 		91C91670214196EA0068548D /* String_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C9166F214196EA0068548D /* String_extension.swift */; };
@@ -95,6 +96,7 @@
 		9119FCE5212655C700BB96A8 /* Calendar_LiteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar_LiteTests.swift; sourceTree = "<group>"; };
 		9119FCE7212655C700BB96A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9119FCF12126561700BB96A8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		915B4CFA2145B7FD00ABCDD2 /* TimeInterval_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval_extension.swift; sourceTree = "<group>"; };
 		91761CAA21378362007CBF3B /* Date_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date_Extension.swift; sourceTree = "<group>"; };
 		91761CAC2138AE40007CBF3B /* MonthCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCollectionReusableView.swift; sourceTree = "<group>"; };
 		91C9166F214196EA0068548D /* String_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_extension.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				91F40D6C2137567400581F80 /* UIColor_Extension.swift */,
 				91761CAA21378362007CBF3B /* Date_Extension.swift */,
 				91C9166F214196EA0068548D /* String_extension.swift */,
+				915B4CFA2145B7FD00ABCDD2 /* TimeInterval_extension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				91C91672214212DA0068548D /* AgendaDetailTableViewCell.swift in Sources */,
 				91E36BC021348EEF00267A24 /* EventService.swift in Sources */,
 				910FB2A1213F38300085AF35 /* MonthGrid.swift in Sources */,
+				915B4CFB2145B7FD00ABCDD2 /* TimeInterval_extension.swift in Sources */,
 				91C91670214196EA0068548D /* String_extension.swift in Sources */,
 				91E36BBC2130823E00267A24 /* DateCollectionViewCell.swift in Sources */,
 				91761CAD2138AE40007CBF3B /* MonthCollectionReusableView.swift in Sources */,

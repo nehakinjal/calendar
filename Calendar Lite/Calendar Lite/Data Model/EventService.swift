@@ -18,24 +18,25 @@ class EventService {
         let today = Date()
         listEvents.updateValue(generateEvents(today), forKey: today)
         
+        //Events for current month begin and end
         if let startMonth = Date.startOf(month: today.month, year: today.year),
             let endMonth = Date.endOf(month: today.month, year: today.year) {
             listEvents.updateValue(generateEvents(startMonth), forKey: startMonth)
             listEvents.updateValue(generateEvents(endMonth), forKey: endMonth)
         }
         
-        
         //Adding events for start and end of interval for testing
         if let intervalEnd = Calendar.current.date(byAdding: DateComponents(day:-1), to: dateInterval.end) {
         
-            print ("date interval start - \(dateInterval.start.longDate)")
-            print ("date interval end - \(intervalEnd.longDate)")
+            print ("date interval start - \(dateInterval.start.longDateString)")
+            print ("date interval end - \(intervalEnd.longDateString)")
             listEvents.updateValue(generateEvents(dateInterval.start), forKey: dateInterval.start)
             listEvents.updateValue(generateEvents(intervalEnd), forKey: intervalEnd)
 
         }
         return listEvents
     }
+    
     
     static func generateEvents(_ onDate:Date) -> [Event] {
         
@@ -73,7 +74,7 @@ class EventService {
         let work = CalendarSource(name: "Work", color: 0x0000ff)
 
         return Event(start: startTime,
-                     duration: 7200,
+                     duration: 7500,
                      subject: "Advisory Board Review",
                      location: "Diablo 3098",
                      attendees: ["Bill", "Miranda", "Alex"],

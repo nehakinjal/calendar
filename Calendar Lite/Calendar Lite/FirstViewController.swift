@@ -52,7 +52,7 @@ class FirstViewController: UIViewController {
     
     var selectedDateLabel: String {
         get {
-            var dateLabel = self.selectedDate?.longDate ?? ""
+            var dateLabel = self.selectedDate?.longDateString ?? ""
             if let selectedDateIndexPath = self.selectedDateIndexPath {
                 if self.yearGrid.cellIndexForSelectedDate == selectedDateIndexPath.row {
                     dateLabel = self.todayLabel + dateLabel
@@ -108,6 +108,7 @@ class FirstViewController: UIViewController {
     func selectCalendarItem(indexPath:IndexPath) {
         self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .bottom)
         self.monthCollectionView.delegate?.collectionView!(self.monthCollectionView, didSelectItemAt: indexPath)
+        self.agendaTableView.reloadData()
     }
 
     
@@ -226,7 +227,17 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1: 3
+        
+        var count:Int = 0
+        if section == 0 {
+            count = 1
+        } else {
+            if let eventsCount = self.selectedCell?.events.count {
+                count = eventsCount
+            }
+        }
+        return count
+        
     }
     
     
@@ -240,6 +251,11 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaDetail", for: indexPath) as! AgendaDetailTableViewCell
             self.agendaTableView.rowHeight = 80
+            
+            if let dayCell = self.selectedCell,
+                dayCell.events.count > 0  {
+                cell.populate(event: dayCell.events[indexPath.row])
+            }
             
             return cell
         }

@@ -52,12 +52,23 @@ extension Date {
         }
     }
     
-    var longDate: String {
+    var longDateString: String {
         get {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "EEEE, MMMM dd, yyyy"
-            return formatter.string(from: self)
+            return getStringWithFormat("EEEE, MMMM dd, yyyy")
         }
+    }
+    
+    var timeString:String {
+        get {
+            return getStringWithFormat("h:mm a")
+        }
+    }
+    
+    func getStringWithFormat(_ format:String) -> String {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
     }
     
     
@@ -110,16 +121,8 @@ extension Date {
         dateComponents.day = dayOrdinal
         date = Calendar.current.date(from: dateComponents)
         
-//        if let yearBegin = Date.dateFromComponents(year: year, month: 1, day: 1),
-//           let range = Calendar.current.range(of: .day, in: .year, for: yearBegin) {
-//
-//            if range ~= dayOrdinal {
-//
-//            }
-//        }
-       
-        
         return date
     }
     
 }
+

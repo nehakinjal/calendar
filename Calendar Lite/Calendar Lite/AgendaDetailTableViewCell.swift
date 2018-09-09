@@ -22,7 +22,6 @@ class AgendaDetailTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.calendarSource.isHidden = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -32,10 +31,12 @@ class AgendaDetailTableViewCell: UITableViewCell {
     }
     
     func populate(event:Event) {
-        self.start.text = event.start.longDate
-        self.duration.text = event.duration.description
+        self.start.text = event.start.timeString
+        self.duration.text = event.duration.stringHourMinute
         self.subject.text = event.subject
         self.location.text = event.location
+        self.calendarSource.fillColor = UIColor(rgb: event.calendarSource.color)
+        self.calendarSource.isHidden = false
     }
 
 }
