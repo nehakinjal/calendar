@@ -7,12 +7,11 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--today-->
+        <!--First View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="Calendar_Lite" customModuleProvider="target" sceneMemberID="viewController">
@@ -256,30 +255,25 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <navigationItem key="navigationItem" title="today" id="XWx-aK-u1z">
-                        <barButtonItem key="leftBarButtonItem" title="Month" id="EFI-RU-3sv">
+                    <navigationItem key="navigationItem" id="XWx-aK-u1z">
+                        <barButtonItem key="leftBarButtonItem" title="Calendar" image="calendar.png" id="EFI-RU-3sv">
                             <connections>
                                 <action selector="viewMonth:" destination="9pv-A4-QxB" id="vFC-LB-X1z"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Agenda" id="29m-3J-kOG">
-                                <connections>
-                                    <action selector="viewAgenda:" destination="9pv-A4-QxB" id="Q5g-SE-UsK"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Both" id="vLu-VB-PgZ">
-                                <connections>
-                                    <action selector="viewBothMonthAndAgenda:" destination="9pv-A4-QxB" id="6eW-q4-8Gz"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Agenda" image="list.png" id="29m-3J-kOG">
+                            <connections>
+                                <action selector="viewAgenda:" destination="9pv-A4-QxB" id="Q5g-SE-UsK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="agendaTableView" destination="C57-zb-QVy" id="dO3-fC-hQY"/>
+                        <outlet property="calendarButton" destination="EFI-RU-3sv" id="cUU-5B-nZs"/>
                         <outlet property="monthCollectionView" destination="d1R-Fp-64R" id="zVn-Yu-Dtx"/>
                         <outlet property="navigationItem" destination="XWx-aK-u1z" id="Pcg-M4-NDB"/>
                         <outlet property="todayNavigationItem" destination="XWx-aK-u1z" id="cbm-Vv-Wg5"/>
+                        <outlet property="viewTypeButton" destination="29m-3J-kOG" id="J3k-NT-IZG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -362,7 +356,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="calendar.png" width="38" height="38"/>
         <image name="first" width="30" height="30"/>
+        <image name="list.png" width="50" height="50"/>
         <image name="second" width="30" height="30"/>
     </resources>
 </document>

@@ -18,6 +18,9 @@
 		9119FCE6212655C700BB96A8 /* Calendar_LiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCE5212655C700BB96A8 /* Calendar_LiteTests.swift */; };
 		9119FCF22126561700BB96A8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9119FCF12126561700BB96A8 /* Event.swift */; };
 		915B4CFB2145B7FD00ABCDD2 /* TimeInterval_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915B4CFA2145B7FD00ABCDD2 /* TimeInterval_extension.swift */; };
+		915B4D022145D77700ABCDD2 /* combo.png in Resources */ = {isa = PBXBuildFile; fileRef = 915B4CFF2145D77600ABCDD2 /* combo.png */; };
+		915B4D072145DA1900ABCDD2 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 915B4D052145DA1900ABCDD2 /* calendar.png */; };
+		915B4D082145DA1900ABCDD2 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 915B4D062145DA1900ABCDD2 /* list.png */; };
 		91761CAB21378362007CBF3B /* Date_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91761CAA21378362007CBF3B /* Date_Extension.swift */; };
 		91761CAD2138AE40007CBF3B /* MonthCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91761CAC2138AE40007CBF3B /* MonthCollectionReusableView.swift */; };
 		91C91670214196EA0068548D /* String_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C9166F214196EA0068548D /* String_extension.swift */; };
@@ -97,6 +100,9 @@
 		9119FCE7212655C700BB96A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9119FCF12126561700BB96A8 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		915B4CFA2145B7FD00ABCDD2 /* TimeInterval_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval_extension.swift; sourceTree = "<group>"; };
+		915B4CFF2145D77600ABCDD2 /* combo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = combo.png; sourceTree = "<group>"; };
+		915B4D052145DA1900ABCDD2 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
+		915B4D062145DA1900ABCDD2 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		91761CAA21378362007CBF3B /* Date_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date_Extension.swift; sourceTree = "<group>"; };
 		91761CAC2138AE40007CBF3B /* MonthCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCollectionReusableView.swift; sourceTree = "<group>"; };
 		91C9166F214196EA0068548D /* String_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String_extension.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 		9119FCCD212655C500BB96A8 /* Calendar Lite */ = {
 			isa = PBXGroup;
 			children = (
+				915B4CFC2145D2E000ABCDD2 /* Asset */,
 				91F40D6B213755BC00581F80 /* Util */,
 				9119FCF0212655DA00BB96A8 /* Data Model */,
 				9119FCCE212655C500BB96A8 /* AppDelegate.swift */,
@@ -212,6 +219,16 @@
 				910FB2A0213F38300085AF35 /* MonthGrid.swift */,
 			);
 			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		915B4CFC2145D2E000ABCDD2 /* Asset */ = {
+			isa = PBXGroup;
+			children = (
+				915B4D052145DA1900ABCDD2 /* calendar.png */,
+				915B4D062145DA1900ABCDD2 /* list.png */,
+				915B4CFF2145D77600ABCDD2 /* combo.png */,
+			);
+			path = Asset;
 			sourceTree = "<group>";
 		};
 		91E36BC92134AFFF00267A24 /* CalendarKit */ = {
@@ -385,9 +402,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				915B4D022145D77700ABCDD2 /* combo.png in Resources */,
 				9119FCDB212655C700BB96A8 /* LaunchScreen.storyboard in Resources */,
+				915B4D072145DA1900ABCDD2 /* calendar.png in Resources */,
 				9119FCD8212655C700BB96A8 /* Assets.xcassets in Resources */,
 				9119FCD6212655C500BB96A8 /* Main.storyboard in Resources */,
+				915B4D082145DA1900ABCDD2 /* list.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,12 +14,16 @@ class FirstViewController: UIViewController {
     @IBOutlet weak var todayNavigationItem: UINavigationItem!
     @IBOutlet weak var monthCollectionView: UICollectionView!
     @IBOutlet weak var agendaTableView: UITableView!
+    @IBOutlet weak var calendarButton: UIBarButtonItem!
+    @IBOutlet weak var viewTypeButton: UIBarButtonItem!
     
+    
+    let todayLabel:String = "Today: "
     
     let today = Date()
-    let todayLabel:String = "Today: "
     var selectedDateIndexPath:IndexPath?
     var yearGrid:YearGrid!
+    var viewBoth:Bool = false
     
     lazy var eventList:[Date:[Event]] = {
         
@@ -108,7 +112,6 @@ class FirstViewController: UIViewController {
     func selectCalendarItem(indexPath:IndexPath) {
         self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .bottom)
         self.monthCollectionView.delegate?.collectionView!(self.monthCollectionView, didSelectItemAt: indexPath)
-        self.agendaTableView.reloadData()
     }
 
     
@@ -119,12 +122,25 @@ class FirstViewController: UIViewController {
     
 
     @IBAction func viewAgenda(_ sender: Any) {
+        if self.viewBoth {
+            self.viewBothMonthAndAgenda()
+            self.viewBoth = false
+            self.viewTypeButton.image = UIImage(named: "list.png")
+        } else {
+            self.viewAgenda()
+            self.viewBoth = true
+            self.viewTypeButton.image = UIImage(named: "combo.png")
+        }
+        
+    }
+    
+    
+    func viewAgenda() {
         self.monthCollectionView.isHidden = true
         self.agendaTableView.isHidden = false
     }
     
-    
-    @IBAction func viewBothMonthAndAgenda(_ sender: Any) {
+    func viewBothMonthAndAgenda() {
         self.monthCollectionView.isHidden = false
         self.agendaTableView.isHidden = false
     }
@@ -181,6 +197,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
                           selected: selected,
                           hasEvents: self.yearGrid.cells[indexPath.row].events.count > 0)
         }
+        self.agendaTableView.reloadData()
     }
     
     
