@@ -18,16 +18,33 @@ class FirstViewController: UIViewController {
     
     let today = Date()
     let todayLabel:String = "Today: "
-    
     var selectedDateIndexPath:IndexPath?
     var yearGrid:YearGrid!
     
+    lazy var eventList:[Date:[Event]] = {
+        
+        var list = [Date:[Event]]()
+        if let yearInterval = Calendar.current.dateInterval(of: .year, for:self.today) {
+            list = EventService.getEventsFor(dateInterval: yearInterval)
+        }
+        return list
+    }()
+    
     var selectedDate:Date? {
+        get {
+            if let dayCell = self.selectedCell {
+                let date = Date.dateFromComponents(year: today.year, month: dayCell.month, day: dayCell.day)
+                return date
+            }
+            return nil
+        }
+    }
+    
+    var selectedCell:DayCell? {
         get {
             if let indexPath = self.selectedDateIndexPath {
                 let dayCell = self.yearGrid.cells[indexPath.row]
-                let date = Date.dateFromComponents(year: today.year, month: dayCell.month, day: dayCell.day)
-                return date
+                return dayCell
             }
             return nil
         }
@@ -54,7 +71,15 @@ class FirstViewController: UIViewController {
         
         self.todayNavigationItem.title = self.today.monthLabel + " \(self.today.year)"
         self.yearGrid = YearGrid(self.today)
+        self.populateEventsForYear()
         
+    }
+    
+    func populateEventsForYear() {
+        for (date, events) in self.eventList {
+            let cellIndex = self.yearGrid.cellIndexForDate(month: date.month, day: date.day)
+            self.yearGrid.cells[cellIndex].events = events
+        }
     }
     
     func initializeAgendaTableView() {
@@ -121,9 +146,11 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = self.monthCollectionView.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath) as! DateCollectionViewCell
+        
         cell.populate(label:self.yearGrid.cells[indexPath.row].label,
                       today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row),
-                      selected: (self.selectedDateIndexPath == indexPath))
+                      selected: (self.selectedDateIndexPath == indexPath),
+                      hasEvents: self.yearGrid.cells[indexPath.row].events.count > 0)
         
         return cell
     }
@@ -147,9 +174,11 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func changeSelection(_ collectionView: UICollectionView, indexPath:IndexPath, selected:Bool) {
         
         if let cell = collectionView.cellForItem(at: indexPath) as! DateCollectionViewCell? {
+            
             cell.populate(label: cell.date.text ?? "",
                           today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row),
-                          selected: selected)
+                          selected: selected,
+                          hasEvents: self.yearGrid.cells[indexPath.row].events.count > 0)
         }
     }
     

@@ -13,8 +13,9 @@ class DateCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var todayView: Circle!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var hasEvents: Circle!
     
-    func populate(label: String, today:Bool, selected:Bool) {
+    func populate(label: String, today:Bool, selected:Bool, hasEvents:Bool) {
         
         var textColor:UIColor = UIColor.black
         var hideHighlight:Bool = true
@@ -30,6 +31,7 @@ class DateCollectionViewCell: UICollectionViewCell {
                 textColor = tintColor
                 hideHighlight = true
             }
+            
         } else {
             // This is for text labels, eg. month label
             hideHighlight = true
@@ -41,6 +43,7 @@ class DateCollectionViewCell: UICollectionViewCell {
         self.date.textColor = textColor
         self.todayView.isHidden = hideHighlight
         self.date.font = font
+        self.hasEvents.isHidden = !hasEvents
         
     }
     

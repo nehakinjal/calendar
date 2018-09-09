@@ -52,10 +52,24 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcm-sK-OGQ" customClass="Circle" customModule="CalendarKit">
+                                                            <rect key="frame" x="17" y="29" width="5" height="5"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <accessibility key="accessibilityConfiguration">
+                                                                <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                            </accessibility>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                                                    <color key="value" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
                                                     </subviews>
                                                 </view>
                                                 <connections>
                                                     <outlet property="date" destination="MHT-Kd-Xp3" id="7aT-ZN-2z3"/>
+                                                    <outlet property="hasEvents" destination="lcm-sK-OGQ" id="cP4-5b-lZ9"/>
                                                     <outlet property="todayView" destination="AI5-6X-gTz" id="SEK-Xr-JlI"/>
                                                 </connections>
                                             </collectionViewCell>
@@ -128,8 +142,8 @@
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evX-ZX-sQV">
-                                                            <rect key="frame" x="119" y="11" width="241" height="15"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evX-ZX-sQV">
+                                                            <rect key="frame" x="119" y="11" width="241" height="16"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
@@ -215,6 +229,7 @@
                                                     <outlet property="duration" destination="cyl-3A-JDX" id="BhH-aV-CfY"/>
                                                     <outlet property="location" destination="l1v-S1-GNf" id="6Tm-VV-6Eh"/>
                                                     <outlet property="start" destination="dw9-jp-93z" id="cKp-Ju-LpY"/>
+                                                    <outlet property="subject" destination="evX-ZX-sQV" id="AOZ-fV-iDR"/>
                                                     <outlet property="title" destination="iH3-dX-zpS" id="N2X-mY-mBG"/>
                                                 </connections>
                                             </tableViewCell>

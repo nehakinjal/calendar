@@ -60,13 +60,15 @@ extension Date {
         }
     }
     
+    
     // Convenience methods
-    static func dateFromComponents (year:Int, month:Int, day:Int) -> Date? {
+    static func dateFromComponents (year:Int, month:Int, day:Int, hour:Int = 0) -> Date? {
         
         var components = DateComponents()
         components.year = year
         components.month = month
         components.day = day
+        components.hour = hour
         
         let date = Calendar.current.date(from:components)
     
@@ -97,6 +99,27 @@ extension Date {
         get {
             return Calendar.current.veryShortWeekdaySymbols
         }
+    }
+    
+    static func getDate(dayOrdinal:Int, year:Int) -> Date? {
+    
+        var date:Date? = nil
+        var dateComponents = DateComponents()
+        
+        dateComponents.year = year
+        dateComponents.day = dayOrdinal
+        date = Calendar.current.date(from: dateComponents)
+        
+//        if let yearBegin = Date.dateFromComponents(year: year, month: 1, day: 1),
+//           let range = Calendar.current.range(of: .day, in: .year, for: yearBegin) {
+//
+//            if range ~= dayOrdinal {
+//
+//            }
+//        }
+       
+        
+        return date
     }
     
 }

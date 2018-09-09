@@ -23,7 +23,7 @@
 		91C91672214212DA0068548D /* AgendaDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C91671214212DA0068548D /* AgendaDetailTableViewCell.swift */; };
 		91E36BBC2130823E00267A24 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BBB2130823E00267A24 /* DateCollectionViewCell.swift */; };
 		91E36BBE21347B2100267A24 /* WeeekdayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BBD21347B2100267A24 /* WeeekdayCollectionViewCell.swift */; };
-		91E36BC021348EEF00267A24 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BBF21348EEF00267A24 /* CalendarService.swift */; };
+		91E36BC021348EEF00267A24 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BBF21348EEF00267A24 /* EventService.swift */; };
 		91E36BD12134B00000267A24 /* CalendarKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E36BC82134AFFF00267A24 /* CalendarKit.framework */; };
 		91E36BD82134B00000267A24 /* CalendarKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E36BD72134B00000267A24 /* CalendarKitTests.swift */; };
 		91E36BDA2134B00000267A24 /* CalendarKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 91E36BCA2134B00000267A24 /* CalendarKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -101,7 +101,7 @@
 		91C91671214212DA0068548D /* AgendaDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaDetailTableViewCell.swift; sourceTree = "<group>"; };
 		91E36BBB2130823E00267A24 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		91E36BBD21347B2100267A24 /* WeeekdayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeekdayCollectionViewCell.swift; sourceTree = "<group>"; };
-		91E36BBF21348EEF00267A24 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
+		91E36BBF21348EEF00267A24 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		91E36BC82134AFFF00267A24 /* CalendarKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CalendarKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		91E36BCA2134B00000267A24 /* CalendarKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarKit.h; sourceTree = "<group>"; };
 		91E36BCB2134B00000267A24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				9119FCF12126561700BB96A8 /* Event.swift */,
-				91E36BBF21348EEF00267A24 /* CalendarService.swift */,
+				91E36BBF21348EEF00267A24 /* EventService.swift */,
 				910FB29E2139C15D0085AF35 /* YearGrid.swift */,
 				910FB2A0213F38300085AF35 /* MonthGrid.swift */,
 			);
@@ -421,7 +421,7 @@
 				9119FCD3212655C500BB96A8 /* SecondViewController.swift in Sources */,
 				91E36BBE21347B2100267A24 /* WeeekdayCollectionViewCell.swift in Sources */,
 				91C91672214212DA0068548D /* AgendaDetailTableViewCell.swift in Sources */,
-				91E36BC021348EEF00267A24 /* CalendarService.swift in Sources */,
+				91E36BC021348EEF00267A24 /* EventService.swift in Sources */,
 				910FB2A1213F38300085AF35 /* MonthGrid.swift in Sources */,
 				91C91670214196EA0068548D /* String_extension.swift in Sources */,
 				91E36BBC2130823E00267A24 /* DateCollectionViewCell.swift in Sources */,

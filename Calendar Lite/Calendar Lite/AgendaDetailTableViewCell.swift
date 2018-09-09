@@ -17,6 +17,7 @@ class AgendaDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var title: UIView!
     @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var subject: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +29,13 @@ class AgendaDetailTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func populate(event:Event) {
+        self.start.text = event.start.longDate
+        self.duration.text = event.duration.description
+        self.subject.text = event.subject
+        self.location.text = event.location
     }
 
 }
