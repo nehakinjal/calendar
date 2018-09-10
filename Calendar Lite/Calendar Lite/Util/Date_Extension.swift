@@ -37,6 +37,11 @@ extension Date {
         }
     }
     
+    var hour:Int {
+        get {
+            return Calendar.current.component(.hour, from: self)
+        }
+    }
     
     var numberOfDaysInMonth: Int {
         get {

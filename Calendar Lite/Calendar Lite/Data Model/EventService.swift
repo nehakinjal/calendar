@@ -8,6 +8,7 @@
 
 import UIKit
 
+//Note: This file contains static mock data for generating events for testing
 class EventService {
     
     static func getEventsFor(dateInterval:DateInterval) -> [Date:[Event]] {
@@ -16,38 +17,63 @@ class EventService {
         
         //Events for today
         let today = Date()
-        listEvents.updateValue(generateEvents(today), forKey: today)
+        
         
         //Events for current month begin and end
         if let startMonth = Date.startOf(month: today.month, year: today.year),
             let endMonth = Date.endOf(month: today.month, year: today.year) {
-            listEvents.updateValue(generateEvents(startMonth), forKey: startMonth)
-            listEvents.updateValue(generateEvents(endMonth), forKey: endMonth)
+            listEvents.updateValue(generateEvents1(startMonth), forKey: startMonth)
+            listEvents.updateValue(generateEvents1(endMonth), forKey: endMonth)
         }
         
         //Adding events for start and end of interval for testing
         if let intervalEnd = Calendar.current.date(byAdding: DateComponents(day:-1), to: dateInterval.end) {
-        
-            print ("date interval start - \(dateInterval.start.longDateString)")
-            print ("date interval end - \(intervalEnd.longDateString)")
-            listEvents.updateValue(generateEvents(dateInterval.start), forKey: dateInterval.start)
-            listEvents.updateValue(generateEvents(intervalEnd), forKey: intervalEnd)
+            listEvents.updateValue(generateEvents2(dateInterval.start), forKey: dateInterval.start)
+            listEvents.updateValue(generateEvents2(intervalEnd), forKey: intervalEnd)
 
         }
+        
+        for day in 1...today.numberOfDaysInMonth {
+            if let date = Date.dateFromComponents(year: today.year, month: today.month, day: day, hour: 10) {
+                var events = generateEvents3(date)
+                if day == today.day {
+                    events.append(contentsOf: generateEvents1(date))
+                }
+                listEvents.updateValue(events, forKey: date)
+            }
+        }
+        
         return listEvents
     }
     
     
-    static func generateEvents(_ onDate:Date) -> [Event] {
+    static func generateEvents1(_ onDate:Date) -> [Event] {
         
         var events:[Event] = [Event]()
-        events.append(generateMockEventPersonal(onDate))
-        events.append(generateMockEventWork(onDate))
+        events.append(generateMockEventPersonal1(onDate))
+        events.append(generateMockEventWork1(onDate))
         
         return events
     }
     
-    static func generateMockEventPersonal(_ onDate:Date) -> Event {
+    static func generateEvents2(_ onDate:Date) -> [Event] {
+        
+        var events:[Event] = [Event]()
+        events.append(generateMockEventPersonal2(onDate))
+        events.append(generateMockEventWork2(onDate))
+        
+        return events
+    }
+    
+    static func generateEvents3(_ onDate:Date) -> [Event] {
+        
+        var events:[Event] = [Event]()
+        events.append(generateMockEventWork3(onDate))
+        
+        return events
+    }
+    
+    static func generateMockEventPersonal1(_ onDate:Date) -> Event {
         
         let startTime:Date = Date.dateFromComponents(year: onDate.year,
                                                      month: onDate.month,
@@ -64,7 +90,24 @@ class EventService {
                      calendarSource: personal)
     }
     
-    static func generateMockEventWork(_ onDate:Date) -> Event {
+    static func generateMockEventPersonal2(_ onDate:Date) -> Event {
+        
+        let startTime:Date = Date.dateFromComponents(year: onDate.year,
+                                                     month: onDate.month,
+                                                     day: onDate.day,
+                                                     hour: 12)!
+        
+        let personal = CalendarSource(name: "Personal", color: 0xff0000)
+        
+        return Event(start: startTime,
+                   duration: 5400,
+                   subject: "Drop-off car for service",
+                   location: "Audi Concord",
+                   attendees: [],
+                   calendarSource: personal)
+    }
+    
+    static func generateMockEventWork1(_ onDate:Date) -> Event {
         
         let startTime:Date = Date.dateFromComponents(year: onDate.year,
                                                      month: onDate.month,
@@ -80,5 +123,39 @@ class EventService {
                      attendees: ["Bill", "Miranda", "Alex"],
                      calendarSource: work)
     }
-
+    
+    static func generateMockEventWork2(_ onDate:Date) -> Event {
+        
+        let startTime:Date = Date.dateFromComponents(year: onDate.year,
+                                                     month: onDate.month,
+                                                     day: onDate.day,
+                                                     hour: 14)!
+        
+        let work = CalendarSource(name: "Work", color: 0x0000ff)
+        
+        return Event(start: startTime,
+                     duration: 1800,
+                     subject: "Innovation Team Meeting",
+                     location: "Design Center 3098",
+                     attendees: ["Anthony", "Gloria", "Emma", "Bob"],
+                     calendarSource: work)
+    }
+    
+    static func generateMockEventWork3(_ onDate:Date) -> Event {
+        
+        let startTime:Date = Date.dateFromComponents(year: onDate.year,
+                                                     month: onDate.month,
+                                                     day: onDate.day,
+                                                     hour: onDate.hour)!
+        
+        let work = CalendarSource(name: "Work", color: 0x0000ff)
+        
+        return Event(start: startTime,
+                     duration: 900,
+                     subject: "Daily Standup - Aviation",
+                     location: "Golden Gate 4099",
+                     attendees: ["Anthony", "Gloria", "Emma", "Bob"],
+                     calendarSource: work)
+    }
+    
 }
