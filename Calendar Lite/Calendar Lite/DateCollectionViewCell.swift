@@ -20,16 +20,20 @@ class DateCollectionViewCell: UICollectionViewCell {
         var textColor:UIColor = UIColor.black
         var hideHighlight:Bool = true
         var font:UIFont
+        var fillColor = UIColor.black
         
         
         if label.isNumeric() {
             font = UIFont.systemFont(ofSize: self.date.font.pointSize)
             if selected {
-                textColor = UIColor.black
+                textColor = UIColor.white
                 hideHighlight = false
-            } else if today {
-                textColor = tintColor
-                hideHighlight = true
+                fillColor = today ? tintColor : UIColor.black
+            } else {
+                if today {
+                    textColor = tintColor
+                    hideHighlight = true
+                }
             }
             
         } else {
@@ -42,6 +46,7 @@ class DateCollectionViewCell: UICollectionViewCell {
         self.date.text = label
         self.date.textColor = textColor
         self.todayView.isHidden = hideHighlight
+        self.todayView.fillColor = fillColor
         self.date.font = font
         self.hasEvents.isHidden = !hasEvents
         

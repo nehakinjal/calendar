@@ -26,33 +26,33 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="273.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="10" id="iq0-Fl-1Q0">
-                                            <size key="itemSize" width="39" height="39"/>
+                                            <size key="itemSize" width="42" height="42"/>
                                             <size key="headerReferenceSize" width="50" height="17"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="date" id="lGU-wg-17L" customClass="DateCollectionViewCell" customModule="Calendar_Lite" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="17" width="39" height="39"/>
+                                                <rect key="frame" x="0.0" y="17" width="42" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="39" height="39"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="42"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AI5-6X-gTz" customClass="Circle" customModule="CalendarKit">
-                                                            <rect key="frame" x="0.0" y="0.0" width="39" height="39"/>
+                                                            <rect key="frame" x="8" y="6" width="26" height="26"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="31" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MHT-Kd-Xp3">
-                                                            <rect key="frame" x="0.0" y="11" width="39" height="17"/>
+                                                            <rect key="frame" x="2" y="11" width="39" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcm-sK-OGQ" customClass="Circle" customModule="CalendarKit">
-                                                            <rect key="frame" x="17" y="29" width="5" height="5"/>
+                                                            <rect key="frame" x="19" y="32" width="5" height="5"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <accessibility key="accessibilityConfiguration">
@@ -297,11 +297,11 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--First-->
+        <!--Calendar-->
         <scene sceneID="gfv-qW-zCk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9tm-4V-9su" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Calendar" image="calendar-date.png" landscapeImage="calendar-date.png" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SeK-pP-jze">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -318,8 +318,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="calendar-date.png" width="29" height="29"/>
         <image name="calendar.png" width="29" height="29"/>
-        <image name="first" width="30" height="30"/>
         <image name="list.png" width="29" height="29"/>
         <image name="second" width="30" height="30"/>
     </resources>
