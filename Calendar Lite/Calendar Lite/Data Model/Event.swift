@@ -37,4 +37,8 @@ struct Event: Codable {
         case attendees
         case calendarSource
     }
+    
+    var attendeesConcatenated : String {
+        return attendees.joined(separator: ", ")
+    }
 }

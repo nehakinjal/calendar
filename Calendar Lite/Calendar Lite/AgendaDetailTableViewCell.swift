@@ -18,6 +18,7 @@ class AgendaDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UIView!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var subject: UILabel!
+    @IBOutlet weak var attendees: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,6 +35,7 @@ class AgendaDetailTableViewCell: UITableViewCell {
         self.start.text = event.start.timeString
         self.duration.text = event.duration.stringHourMinute
         self.subject.text = event.subject
+        self.attendees.text = event.attendeesConcatenated
         self.location.text = event.location
         self.calendarSource.fillColor = UIColor(rgb: event.calendarSource.color)
         self.calendarSource.isHidden = false

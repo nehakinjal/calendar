@@ -110,7 +110,7 @@ class FirstViewController: UIViewController {
     
     
     func selectCalendarItem(indexPath:IndexPath) {
-        self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .bottom)
+        self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
         self.monthCollectionView.delegate?.collectionView!(self.monthCollectionView, didSelectItemAt: indexPath)
     }
 
