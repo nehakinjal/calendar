@@ -52,10 +52,7 @@ struct YearGrid {
     
     var cellIndexForSelectedDate:Int {
         get {
-//            let month = self.selectedDate.month
-//            let day = self.selectedDate.day
-//            let cellIndex = self.cellsRequiredForMonths(month - 1) + self.months[month-1].cellIndex(forDay: day)
-//            return cellIndex
+
             return cellIndexForDate(month: self.selectedDate.month, day: self.selectedDate.day)
 
         }

@@ -82,6 +82,13 @@ extension Date {
     }
     
     
+    var dateWithNoTime: Date {
+        get {
+            return Date.dateFromComponents(year: self.year, month: self.month, day: self.day)!
+        }
+    }
+    
+    
     // Convenience methods
     static func dateFromComponents (year:Int, month:Int, day:Int, hour:Int = 0) -> Date? {
         

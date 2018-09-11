@@ -18,18 +18,19 @@ class EventService {
         //Events for today
         let today = Date()
         
+        //Please note that all events are added with (key = date ignoring the time) so that one day's events are grouped under one dictionary entry
         
         //Events for current month begin and end
         if let startMonth = Date.startOf(month: today.month, year: today.year),
             let endMonth = Date.endOf(month: today.month, year: today.year) {
-            listEvents.updateValue(generateEvents1(startMonth), forKey: startMonth)
-            listEvents.updateValue(generateEvents1(endMonth), forKey: endMonth)
+            listEvents.updateValue(generateEvents1(startMonth), forKey: startMonth.dateWithNoTime)
+            listEvents.updateValue(generateEvents1(endMonth), forKey: endMonth.dateWithNoTime)
         }
         
         //Adding events for start and end of interval for testing
         if let intervalEnd = Calendar.current.date(byAdding: DateComponents(day:-1), to: dateInterval.end) {
-            listEvents.updateValue(generateEvents2(dateInterval.start), forKey: dateInterval.start)
-            listEvents.updateValue(generateEvents2(intervalEnd), forKey: intervalEnd)
+            listEvents.updateValue(generateEvents2(dateInterval.start), forKey: dateInterval.start.dateWithNoTime)
+            listEvents.updateValue(generateEvents2(intervalEnd), forKey: intervalEnd.dateWithNoTime)
 
         }
         
@@ -39,7 +40,7 @@ class EventService {
                 if day == today.day {
                     events.append(contentsOf: generateEvents1(date))
                 }
-                listEvents.updateValue(events, forKey: date)
+                listEvents.updateValue(events, forKey: date.dateWithNoTime)
             }
         }
         

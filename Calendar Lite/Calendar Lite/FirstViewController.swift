@@ -19,20 +19,30 @@ class FirstViewController: UIViewController {
     
     
     let todayLabel:String = "Today: "
-    
-    let today = Date()
+    let today = Date().dateWithNoTime
     var selectedDateIndexPath:IndexPath?
     var yearGrid:YearGrid!
     var viewBoth:Bool = false
+    
+    //Events for today and future sorted by date
+    var eventsTodayOnwards: [(key:Date, value:[Event])] {
+        get {
+            let futureEvents = self.eventList.filter({$0.0 >= self.today})
+            let eventsSorted = futureEvents.sorted(by: { $0.0 < $1.0 })
+            return eventsSorted
+        }
+    }
+    
     
     lazy var eventList:[Date:[Event]] = {
         
         var list = [Date:[Event]]()
         if let yearInterval = Calendar.current.dateInterval(of: .year, for:self.today) {
-            list = EventService.getEventsFor(dateInterval: yearInterval)
+            list = (EventService.getEventsFor(dateInterval: yearInterval))
         }
         return list
     }()
+    
     
     var selectedDate:Date? {
         get {
@@ -44,6 +54,7 @@ class FirstViewController: UIViewController {
         }
     }
     
+    
     var selectedCell:DayCell? {
         get {
             if let indexPath = self.selectedDateIndexPath {
@@ -53,6 +64,7 @@ class FirstViewController: UIViewController {
             return nil
         }
     }
+   
     
     var selectedDateLabel: String {
         get {
@@ -66,7 +78,9 @@ class FirstViewController: UIViewController {
         }
     }
     
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -75,26 +89,30 @@ class FirstViewController: UIViewController {
         
         self.yearGrid = YearGrid(self.today)
         self.populateEventsForYear()
-        
     }
     
+    
     func setTitle(_ title:String) {
+        
         self.todayNavigationItem.title = title
     }
     
+    
     func populateEventsForYear() {
+        
         for (date, events) in self.eventList {
             let cellIndex = self.yearGrid.cellIndexForDate(month: date.month, day: date.day)
             self.yearGrid.cells[cellIndex].events = events
         }
     }
     
+    
     func initializeAgendaTableView() {
         
         self.agendaTableView.delegate = self
         self.agendaTableView.dataSource = self
-        
     }
+    
     
     func initializeMonthCollectionView() {
         
@@ -105,6 +123,7 @@ class FirstViewController: UIViewController {
             layout.sectionHeadersPinToVisibleBounds = true
         }
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         let indexPath = IndexPath(item:self.yearGrid.cellIndexForSelectedDate , section: 0)
@@ -134,7 +153,6 @@ class FirstViewController: UIViewController {
             self.viewBoth = true
             self.viewTypeButton.image = UIImage(named: "combo.png")
         }
-        
     }
     
     
@@ -142,6 +160,7 @@ class FirstViewController: UIViewController {
         self.monthCollectionView.isHidden = true
         self.agendaTableView.isHidden = false
     }
+    
     
     func viewBothMonthAndAgenda() {
         self.monthCollectionView.isHidden = false
@@ -152,6 +171,7 @@ class FirstViewController: UIViewController {
 
 // Collection view for Months
 extension FirstViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+   
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -243,20 +263,20 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
 // TableView for Agenda per week
 extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return self.eventsTodayOnwards.count
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         var count:Int = 0
-
-        if let eventsCount = self.selectedCell?.events.count {
-            count = eventsCount
+        if let events = self.eventsInTableViewSection(section) {
+            count = events.count
         }
-        
         return count
-        
     }
     
     
@@ -265,26 +285,31 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaDetail", for: indexPath) as! AgendaDetailTableViewCell
         self.agendaTableView.rowHeight = 80
         
-        if let dayCell = self.selectedCell,
-            dayCell.events.count > 0  {
-            cell.populate(event: dayCell.events[indexPath.row])
+        if let events = self.eventsInTableViewSection(indexPath.section) {
+            cell.populate(event: events[indexPath.row])
         }
-        
         return cell
         
     }
-    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return self.selectedDateLabel
-//    }
+
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel.init(frame: CGRect.init(x: 10, y: 5, width: tableView.frame.size.width, height: 40))
-        label.textColor = UIColor.white
-        label.backgroundColor = tableView.tintColor
-        label.font = UIFont.systemFont(ofSize: 14.0)
-        label.text = self.selectedDateLabel
+        
+        let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.size.width, height: 30))
+        label.font = UIFont.systemFont(ofSize: 12.0)
+        label.backgroundColor = UIColor(rgb: 0xD3D3D3)
+        label.text = "  " + self.dateForTableViewSection(section).longDateString
         return label
+    }
+    
+    
+    func dateForTableViewSection(_ section:Int) -> Date{
+        return self.eventsTodayOnwards[section].key
+    }
+    
+    
+    func eventsInTableViewSection(_ section:Int) -> [Event]? {
+        return self.eventsTodayOnwards[section].value
     }
     
 }
