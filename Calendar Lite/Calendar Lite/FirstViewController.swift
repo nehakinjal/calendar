@@ -73,10 +73,13 @@ class FirstViewController: UIViewController {
         self.initializeAgendaTableView()
         self.initializeMonthCollectionView()
         
-        self.todayNavigationItem.title = self.today.monthLabel + " \(self.today.year)"
         self.yearGrid = YearGrid(self.today)
         self.populateEventsForYear()
         
+    }
+    
+    func setTitle(_ title:String) {
+        self.todayNavigationItem.title = title
     }
     
     func populateEventsForYear() {
@@ -177,9 +180,6 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         self.selectedDateIndexPath = indexPath
         self.changeSelection(collectionView, indexPath: indexPath, selected: true)
         
-        //update agenda table view with selected date
-        let cell = self.agendaTableView.cellForRow(at: IndexPath(row: 0, section: 0))as! AgendaTableViewCell
-        cell.title.text = self.selectedDateLabel
     }
     
     
@@ -198,6 +198,10 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
                           hasEvents: self.yearGrid.cells[indexPath.row].events.count > 0)
         }
         self.agendaTableView.reloadData()
+        
+        if let date = selectedDate {
+            self.setTitle("\(date.shortMonth) \(date.year)")
+        }
     }
     
     
@@ -240,19 +244,17 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
 // TableView for Agenda per week
 extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         var count:Int = 0
-        if section == 0 {
-            count = 1
-        } else {
-            if let eventsCount = self.selectedCell?.events.count {
-                count = eventsCount
-            }
+
+        if let eventsCount = self.selectedCell?.events.count {
+            count = eventsCount
         }
+        
         return count
         
     }
@@ -260,22 +262,29 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
-            let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaSummary", for: indexPath) as! AgendaTableViewCell
-            cell.title.text = self.selectedDateLabel
-            self.agendaTableView.rowHeight = 40
-            return cell
-        } else {
-            let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaDetail", for: indexPath) as! AgendaDetailTableViewCell
-            self.agendaTableView.rowHeight = 80
-            
-            if let dayCell = self.selectedCell,
-                dayCell.events.count > 0  {
-                cell.populate(event: dayCell.events[indexPath.row])
-            }
-            
-            return cell
+        let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaDetail", for: indexPath) as! AgendaDetailTableViewCell
+        self.agendaTableView.rowHeight = 80
+        
+        if let dayCell = self.selectedCell,
+            dayCell.events.count > 0  {
+            cell.populate(event: dayCell.events[indexPath.row])
         }
+        
+        return cell
+        
+    }
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return self.selectedDateLabel
+//    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel.init(frame: CGRect.init(x: 10, y: 5, width: tableView.frame.size.width, height: 40))
+        label.textColor = UIColor.white
+        label.backgroundColor = tableView.tintColor
+        label.font = UIFont.systemFont(ofSize: 14.0)
+        label.text = self.selectedDateLabel
+        return label
     }
     
 }

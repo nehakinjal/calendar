@@ -50,6 +50,11 @@ extension Date {
         }
     }
     
+    var shortMonth:String {
+        get {
+            return Calendar.current.shortMonthSymbols[month-1]
+        }
+    }
     
     var monthLabel:String {
         get {
