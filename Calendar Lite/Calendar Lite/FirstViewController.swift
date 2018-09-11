@@ -217,10 +217,10 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
                           selected: selected,
                           hasEvents: self.yearGrid.cells[indexPath.row].events.count > 0)
         }
-        self.agendaTableView.reloadData()
         
         if let date = selectedDate {
             self.setTitle("\(date.shortMonth) \(date.year)")
+            self.agendaTableView.scrollToRow(at: self.indexPathForFirstAgendaOnDate(date), at: .top, animated: false)
         }
     }
     
@@ -262,7 +262,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
 
 // TableView for Agenda per week
-extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
+extension FirstViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -282,8 +282,8 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = agendaTableView.dequeueReusableCell(withIdentifier: "agendaDetail", for: indexPath) as! AgendaDetailTableViewCell
-        self.agendaTableView.rowHeight = 80
+        let cell = tableView.dequeueReusableCell(withIdentifier: "agendaDetail", for: indexPath) as! AgendaDetailTableViewCell
+        tableView.rowHeight = 80
         
         if let events = self.eventsInTableViewSection(indexPath.section) {
             cell.populate(event: events[indexPath.row])
@@ -303,6 +303,13 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    
+        let indexPath = self.agendaTableView.indexPathsForVisibleRows
+        print ("scrolled to index - \(indexPath)")
+    }
+    
+    
     func dateForTableViewSection(_ section:Int) -> Date{
         return self.eventsTodayOnwards[section].key
     }
@@ -310,6 +317,18 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource {
     
     func eventsInTableViewSection(_ section:Int) -> [Event]? {
         return self.eventsTodayOnwards[section].value
+    }
+    
+    
+    func indexPathForFirstAgendaOnDate(_ date: Date) -> IndexPath{
+        
+        var indexPath = IndexPath(row: 0, section: 0)
+        if let index = eventsTodayOnwards.index(where: { (key:Date, value:[Event]) -> Bool in
+            return key == date
+        }) {
+            indexPath = IndexPath(row: 0, section: index)
+        }
+        return indexPath
     }
     
 }
