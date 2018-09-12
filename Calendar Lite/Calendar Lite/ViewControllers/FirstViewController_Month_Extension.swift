@@ -76,17 +76,11 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         
         if let date = self.selectedDate {
             self.setTitle("\(date.shortMonth) \(date.year)")
-            
-            // If agenda table view scrolled to cause collection view cell selection we need not scroll agenda table view again
-            if self.agendaTableScrolled {
-                self.agendaTableScrolled = false
-            } else {
-                self.agendaTableView.scrollToRow(at: self.indexPathForFirstAgendaOnDate(date), at: .top, animated: false)
-            }
+            self.updateAgendaWithSelectedDate(date)
         }
         
     }
-    
+
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         self.changeSelection(collectionView, indexPath: indexPath, selected: false)
@@ -106,6 +100,21 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         
     }
     
+    
+    func updateAgendaWithSelectedDate (_ date:Date) {
+        
+        if self.agendaTableView.isHidden {
+            self.viewBothMonthAndAgenda()
+        }
+        
+        // If agenda table view scrolled to cause collection view cell selection we need not scroll agenda table view again
+        if self.agendaTableScrolled {
+            self.agendaTableScrolled = false
+        } else {
+            self.agendaTableView.scrollToRow(at: self.indexPathForFirstAgendaOnDate(date), at: .top, animated: false)
+        }
+        
+    }
     
     func selectCalendarItem(indexPath:IndexPath) {
         
