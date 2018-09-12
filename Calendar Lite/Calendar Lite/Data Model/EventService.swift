@@ -11,6 +11,34 @@ import UIKit
 //Note: This file contains static mock data for generating events for testing
 class EventService {
     
+    static func getEvents() -> [Date:[Event]] {
+    
+        let list = getEventsFromJsonFile("Events")  ?? [Date:[Event]]()
+    
+        //        if let yearInterval = Calendar.current.dateInterval(of: .year, for:Date()) {
+        //            list = (EventService.getEventsFor(dateInterval: yearInterval))
+        //        }
+        return list
+    }
+    
+    //Option 1: Getting events from json file
+    static func getEventsFromJsonFile(_ fileName: String) -> [Date:[Event]]? {
+        
+        if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: url)
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode([Date:[Event]].self, from: data)
+                return jsonData
+            } catch {
+                print("error:\(error)")
+            }
+        }
+        return nil
+    }
+    
+    
+    // Option 2: Generating events programtically
     static func getEventsFor(dateInterval:DateInterval) -> [Date:[Event]] {
         
         var listEvents = [Date:[Event]]()
@@ -44,6 +72,12 @@ class EventService {
             }
         }
         
+//        let encoder = JSONEncoder()
+//        if let jsonData = try? encoder.encode(listEvents) {
+//            if let jsonString = String(data: jsonData, encoding: .utf8) {
+//                print(jsonString)
+//            }
+//        }
         return listEvents
     }
     
@@ -158,5 +192,8 @@ class EventService {
                      attendees: ["Anthony", "Gloria", "Emma", "Bob"],
                      calendarSource: work)
     }
+    
+    
+
     
 }
