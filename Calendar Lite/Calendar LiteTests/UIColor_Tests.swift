@@ -1,5 +1,5 @@
 //
-//  UIColorTests.swift
+//  UIColor_Tests.swift
 //  Calendar LiteTests
 //
 //  Created by Neha Dalal on 8/29/18.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class UIColorTests: XCTestCase {
+class UIColor_Tests: XCTestCase {
     
     override func setUp() {
         super.setUp()
