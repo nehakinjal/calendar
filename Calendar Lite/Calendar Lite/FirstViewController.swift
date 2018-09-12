@@ -23,12 +23,14 @@ class FirstViewController: UIViewController {
     var selectedDateIndexPath:IndexPath?
     var yearGrid:YearGrid!
     var viewBoth:Bool = false
+    var agendaTableScrolled = false
     
-    //Events for today and future sorted by date
-    var eventsTodayOnwards: [(key:Date, value:[Event])] {
+
+    //Events sorted by date
+    var eventsSorted: [(key:Date, value:[Event])] {
         get {
-            let futureEvents = self.eventList.filter({$0.0 >= self.today})
-            let eventsSorted = futureEvents.sorted(by: { $0.0 < $1.0 })
+            //let futureEvents = self.eventList.filter({$0.0 >= self.today})
+            let eventsSorted = self.eventList.sorted(by: { $0.0 < $1.0 })
             return eventsSorted
         }
     }
@@ -129,12 +131,6 @@ class FirstViewController: UIViewController {
         let indexPath = IndexPath(item:self.yearGrid.cellIndexForSelectedDate , section: 0)
         self.selectCalendarItem(indexPath: indexPath)
     }
-    
-    
-    func selectCalendarItem(indexPath:IndexPath) {
-        self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
-        self.monthCollectionView.delegate?.collectionView!(self.monthCollectionView, didSelectItemAt: indexPath)
-    }
 
     
     @IBAction func viewMonth(_ sender: Any) {
@@ -185,7 +181,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = self.monthCollectionView.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath) as! DateCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath) as! DateCollectionViewCell
         
         cell.populate(label:self.yearGrid.cells[indexPath.row].label,
                       today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row),
@@ -194,36 +190,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        self.selectedDateIndexPath = indexPath
-        self.changeSelection(collectionView, indexPath: indexPath, selected: true)
-        
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        self.changeSelection(collectionView, indexPath: indexPath, selected: false)
-    }
-    
-    
-    func changeSelection(_ collectionView: UICollectionView, indexPath:IndexPath, selected:Bool) {
-        
-        if let cell = collectionView.cellForItem(at: indexPath) as! DateCollectionViewCell? {
-            
-            cell.populate(label: cell.date.text ?? "",
-                          today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row),
-                          selected: selected,
-                          hasEvents: self.yearGrid.cells[indexPath.row].events.count > 0)
-        }
-        
-        if let date = selectedDate {
-            self.setTitle("\(date.shortMonth) \(date.year)")
-            self.agendaTableView.scrollToRow(at: self.indexPathForFirstAgendaOnDate(date), at: .top, animated: false)
-        }
-    }
-    
+
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -257,6 +224,55 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
             assert(false, "Undefined element kind")
         }
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        self.selectedDateIndexPath = indexPath
+        self.changeSelection(collectionView, indexPath: indexPath, selected: true)
+       
+        if let date = self.selectedDate {
+            self.setTitle("\(date.shortMonth) \(date.year)")
+            
+            // If agenda table view scrolled to cause collection view cell selection we need not scroll agenda table view again
+            if self.agendaTableScrolled {
+                self.agendaTableScrolled = false
+            } else {
+                self.agendaTableView.scrollToRow(at: self.indexPathForFirstAgendaOnDate(date), at: .top, animated: false)
+            }
+        }
+        
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        self.changeSelection(collectionView, indexPath: indexPath, selected: false)
+    }
+    
+    
+    // Helper Functions
+    func changeSelection(_ collectionView: UICollectionView, indexPath:IndexPath, selected:Bool) {
+        
+        if let cell = collectionView.cellForItem(at: indexPath) as! DateCollectionViewCell? {
+            
+            cell.populate(label: cell.date.text ?? "",
+                          today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row),
+                          selected: selected,
+                          hasEvents: self.yearGrid.cells[indexPath.row].events.count > 0)
+        }
+
+    }
+    
+    
+    func selectCalendarItem(indexPath:IndexPath) {
+
+        if let oldSelectionIndexPath = self.selectedDateIndexPath {
+            self.monthCollectionView.deselectItem(at: oldSelectionIndexPath, animated: false)
+            self.monthCollectionView.delegate?.collectionView!(self.monthCollectionView, didDeselectItemAt: oldSelectionIndexPath)
+        }
+        self.monthCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .centeredVertically)
+        self.monthCollectionView.delegate?.collectionView!(self.monthCollectionView, didSelectItemAt: indexPath)
+    }
 
 }
 
@@ -266,7 +282,7 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource, UIScr
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.eventsTodayOnwards.count
+        return self.eventsSorted.count
     }
     
     
@@ -297,33 +313,64 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource, UIScr
         
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.size.width, height: 30))
         label.font = UIFont.systemFont(ofSize: 12.0)
-        label.backgroundColor = UIColor(rgb: 0xD3D3D3)
+        label.backgroundColor = UIColor(rgb: 0xf2f2f2)
         label.text = "  " + self.dateForTableViewSection(section).longDateString
         return label
     }
     
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+
+        // We want to handle the scrolls of table view only
+        if let _ = scrollView as? UITableView {
+            self.scrollCalendarToMatchVisibleAgenda()
+        }
+    }
     
-        let indexPath = self.agendaTableView.indexPathsForVisibleRows
-        print ("scrolled to index - \(indexPath)")
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//
+//        // We want to handle the scrolls of table view only
+//        if let _ = scrollView as? UITableView {
+//            self.scrollCalendarToMatchVisibleAgenda()
+//        }
+//    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.scrollCalendarToMatchAgendaPosition(indexPath)
+    }
+    
+    func scrollCalendarToMatchVisibleAgenda() {
+        
+        if let indexPath = self.agendaTableView.indexPathsForVisibleRows?.first{
+            self.scrollCalendarToMatchAgendaPosition(indexPath)
+        }
+    }
+    
+    func scrollCalendarToMatchAgendaPosition(_ indexPath:IndexPath) {
+        
+        self.agendaTableScrolled = true
+        let date = self.dateForTableViewSection(indexPath.section)
+        let index = self.yearGrid.cellIndexForDate(month: date.month, day: date.day)
+        self.selectCalendarItem(indexPath: IndexPath(row: index, section: 0))
+        
+        print ("Agenda table scrolled to index - \(indexPath)")
     }
     
     
     func dateForTableViewSection(_ section:Int) -> Date{
-        return self.eventsTodayOnwards[section].key
+        return self.eventsSorted[section].key
     }
     
     
     func eventsInTableViewSection(_ section:Int) -> [Event]? {
-        return self.eventsTodayOnwards[section].value
+        return self.eventsSorted[section].value
     }
     
     
     func indexPathForFirstAgendaOnDate(_ date: Date) -> IndexPath{
         
         var indexPath = IndexPath(row: 0, section: 0)
-        if let index = eventsTodayOnwards.index(where: { (key:Date, value:[Event]) -> Bool in
+        if let index = eventsSorted.index(where: { (key:Date, value:[Event]) -> Bool in
             return key == date
         }) {
             indexPath = IndexPath(row: 0, section: index)
