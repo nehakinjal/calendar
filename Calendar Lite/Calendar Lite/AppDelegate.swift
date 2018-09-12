@@ -16,6 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let api = API()
+        
+        api.currentWeatherAsync { (result) in
+            switch result {
+            case .success(let response):
+                print("Current Weather:\n\(response)")
+            case .error(let error):
+                print("Weather api failed, Error:\(error)")
+                
+            }
+        }
         return true
     }
 
