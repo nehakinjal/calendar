@@ -1,7 +1,7 @@
-# Calendar
-Calendar Lite app has following features
+# Calendar Lite
+Simple calendar app showwing Calendar and agenda showing your daily events.
 
-##Features:
+## Features:
 1. Shows calendar for the whole year. 
 2. Shows events for selected day in calendar
 3. Shows Calendar only view
@@ -11,7 +11,7 @@ Calendar Lite app has following features
 7. When viewing Calendar if you select a day it brings up agenda for that day.
 8. Events can be added using Events.json file or programatically.
 
-##Note:
+## Note:
 1. For simplicity the app shows only current year. The app can easily be extended to show previous and future years.
 2. I have not implemented + button to define new calendar events due to limitation of time. This can be done very easily by adding date picker form
 
