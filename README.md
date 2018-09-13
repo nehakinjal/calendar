@@ -1,5 +1,5 @@
 # Calendar Lite
-Simple calendar app showwing Calendar and agenda showing your daily events.
+Simple calendar app showing Calendar and agenda showing your daily events.
 
 ## Features:
 1. Shows calendar for the whole year. 
