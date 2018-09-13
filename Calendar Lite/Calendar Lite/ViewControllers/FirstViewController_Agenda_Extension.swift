@@ -20,23 +20,32 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource, UIScr
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        var count:Int = 0
+        var count:Int = 1
         if let events = self.eventsInTableViewSection(section) {
             count = events.count
         }
+        
+        //If no events we must have a cell indicating "No events"
+        count = (count == 0) ? 1 : count
+        
         return count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "agendaDetail", for: indexPath) as! AgendaDetailTableViewCell
-        tableView.rowHeight = 80
-        
-        if let events = self.eventsInTableViewSection(indexPath.section) {
+        if let events = self.eventsInTableViewSection(indexPath.section),
+            events.count > 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "agendaDetail", for: indexPath) as! AgendaDetailTableViewCell
+            tableView.rowHeight = 80
+            
             cell.populate(event: events[indexPath.row])
+           
+            return cell
+        } else {
+            tableView.rowHeight = 44
+            return tableView.dequeueReusableCell(withIdentifier: "noEvents", for: indexPath)
         }
-        return cell
         
     }
     
@@ -44,7 +53,7 @@ extension FirstViewController: UITableViewDelegate, UITableViewDataSource, UIScr
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.size.width, height: 30))
-        label.font = UIFont.systemFont(ofSize: 12.0)
+        label.font = UIFont.systemFont(ofSize: 14.0)
         label.backgroundColor = UIColor(rgb: 0xf2f2f2)
         label.text = "  " + self.dateForTableViewSection(section).longDateString
         return label

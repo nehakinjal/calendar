@@ -12,13 +12,13 @@ struct DayCell {
     var day:Int
     var month:Int
     var label:String
-    var events:[Event]
+    var hasEvents: Bool
     
     init(day: Int, month: Int) {
         self.day = day
         self.month = month
         self.label = day > 0 ? String(day) : ""
-        self.events = []
+        self.hasEvents = false
     }
     
     var monthLabel:String {

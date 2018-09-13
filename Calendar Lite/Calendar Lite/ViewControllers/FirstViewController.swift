@@ -32,18 +32,28 @@ class FirstViewController: UIViewController {
     }
 
     //Events sorted by date
-    var eventsSorted: [(key:Date, value:[Event])] {
-        get {
-            //let futureEvents = self.eventList.filter({$0.0 >= self.today})
-            let eventsSorted = self.eventList.sorted(by: { $0.0 < $1.0 })
-            return eventsSorted
+    lazy var eventsSorted: [(key:Date, value:[Event])] = {
+
+        var eventsSorted = [Date:[Event]]()
+        
+        //Add an entry for each day
+        if let range = Calendar.current.range(of: .day, in: .year, for: self.today) {
+            for dayOrdinal in 1...range.count {
+                if let date = Date.getDate(dayOrdinal: dayOrdinal, year: today.year){
+                    eventsSorted[date] = []
+                }
+            }
         }
-    }
-    
-    
-    lazy var eventList:[Date:[Event]] = {
-        return EventService.getEvents()
+
+        eventsSorted.merge(EventService.getEvents(), uniquingKeysWith: { (v1:[Event], v2:[Event]) -> [Event] in
+            var result:[Event] = v1
+            result.append(contentsOf: v2)
+            return result
+        })
+        
+        return eventsSorted.sorted(by: { $0.0 < $1.0 })
     }()
+    
     
     
     var selectedDate:Date? {
@@ -102,9 +112,9 @@ class FirstViewController: UIViewController {
     
     func populateEventsForYear() {
         
-        for (date, events) in self.eventList {
+        for (date, events) in self.eventsSorted {
             let cellIndex = self.yearGrid.cellIndexForDate(month: date.month, day: date.day)
-            self.yearGrid.cells[cellIndex].events = events
+            self.yearGrid.cells[cellIndex].hasEvents = (events.count > 0)
         }
     }
     

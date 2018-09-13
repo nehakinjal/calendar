@@ -26,10 +26,12 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "date", for: indexPath) as! DateCollectionViewCell
         
-        cell.populate(label:self.yearGrid.cells[indexPath.row].label,
+        let dayCell = self.yearGrid.cells[indexPath.row]
+        
+        cell.populate(label:dayCell.label,
                       today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row),
                       selected: (self.selectedDateIndexPath == indexPath),
-                      hasEvents: self.yearGrid.cells[indexPath.row].events.count > 0)
+                      hasEvents: dayCell.hasEvents)
         
         return cell
     }
@@ -95,7 +97,7 @@ extension FirstViewController: UICollectionViewDataSource, UICollectionViewDeleg
             cell.populate(label: cell.date.text ?? "",
                           today: (self.yearGrid.cellIndexForSelectedDate == indexPath.row),
                           selected: selected,
-                          hasEvents: self.yearGrid.cells[indexPath.row].events.count > 0)
+                          hasEvents: self.yearGrid.cells[indexPath.row].hasEvents)
         }
         
     }
