@@ -1,5 +1,5 @@
 //
-//  FirstViewController_Month_Extension.swift
+//  CalendarViewController_Month_Extension.swift
 //  Calendar Lite
 //
 //  Created by Neha Dalal on 9/12/18.
@@ -9,7 +9,7 @@
 import UIKit
 
 // Collection view for Months
-extension FirstViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension CalendarViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

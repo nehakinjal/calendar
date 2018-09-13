@@ -1,5 +1,5 @@
 //
-//  FirstViewController_Agenda_Extension.swift
+//  CalendarViewController_Agenda_Extension.swift
 //  Calendar Lite
 //
 //  Created by Neha Dalal on 9/12/18.
@@ -10,7 +10,7 @@ import UIKit
 
 
 // TableView for Agenda per week
-extension FirstViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+extension CalendarViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -51,5 +51,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>&quot;Calendar Lite&quot; would like to use current location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>&quot;Calendar Lite&quot;  would like to use current location</string>
 </dict>
 </plist>

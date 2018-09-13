@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  CalendarViewController.swift
 //  Calendar Lite
 //
 //  Created by Neha Dalal on 8/16/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class CalendarViewController: UIViewController {
 
   
     @IBOutlet weak var todayNavigationItem: UINavigationItem!
