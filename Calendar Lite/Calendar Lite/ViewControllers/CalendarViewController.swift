@@ -33,13 +33,13 @@ class CalendarViewController: UIViewController {
 
     //Events sorted by date
     lazy var eventsSorted: [(key:Date, value:[Event])] = {
-
+        [unowned self] in
         var eventsSorted = [Date:[Event]]()
         
         //Add an entry for each day
         if let range = Calendar.current.range(of: .day, in: .year, for: self.today) {
             for dayOrdinal in 1...range.count {
-                if let date = Date.getDate(dayOrdinal: dayOrdinal, year: today.year){
+                if let date = Date.getDate(dayOrdinal: dayOrdinal, year: self.today.year){
                     eventsSorted[date] = []
                 }
             }

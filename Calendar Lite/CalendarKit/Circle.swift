@@ -23,6 +23,7 @@ import UIKit
     @IBInspectable public var lineWidth:   CGFloat = 0   { didSet { setNeedsLayout() } }
     
     lazy private var shapeLayer: CAShapeLayer = {
+        [unowned self] in
         let _shapeLayer = CAShapeLayer()
         _shapeLayer.fillColor = self.fillColor.cgColor
         _shapeLayer.strokeColor = self.strokeColor.cgColor

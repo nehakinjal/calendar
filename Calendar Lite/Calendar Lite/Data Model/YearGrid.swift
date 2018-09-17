@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct YearGrid {
+class YearGrid {
     
     var selectedDate: Date
     var months:[MonthGrid]
@@ -67,7 +67,7 @@ struct YearGrid {
 
     
     lazy var cells:[DayCell] = {
-    
+        [unowned self] in
         var cells:[DayCell] = []
     
         for monthGrid in self.months {
